@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Reticle
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 3040931037
+    locked: 0
+  - name: Items
+    uniqueID: 1299318059
+    locked: 0
+  - name: Entities
+    uniqueID: 3946505003
+    locked: 0
+  - name: UI
+    uniqueID: 3526570097
     locked: 0

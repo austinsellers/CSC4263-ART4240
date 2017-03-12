@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mouseTracking : MonoBehaviour {
+public class mouseTracking : MonoBehaviour 
+{
     Vector2 mousePos;
 
 	void Start ()
@@ -13,6 +14,6 @@ public class mouseTracking : MonoBehaviour {
 	void Update ()
     {
         mousePos = Input.mousePosition;
-        GameObject.Find("reticle").GetComponent<Transform>().position = mousePos;
+        GameObject.Find("Reticle").GetComponent<Transform>().position = mousePos;
 	}
 }

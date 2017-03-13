@@ -6,27 +6,16 @@ public abstract class EnemyMovement : MonoBehaviour
 {
 
 	Vector2 playerPos;
-	float distance;
+	protected float distance;
 	Vector2 currentPos;
 	Vector2 localPosition;
 	Rigidbody2D rigidBody;
-	float speed;
-	protected virtual void Start(string name)
+	protected float speed;
+
+	protected virtual void Start()
 	{
-		if (name == "Melee") 
-		{
-			distance = 2f;
-			speed = 2f;
-			currentPos = transform.position;
-			rigidBody = gameObject.GetComponent<Rigidbody2D> ();
-		}
-		if (name == "Ranged") 
-		{
-			distance = 4.5f;
-			speed = 2f;
-			currentPos = transform.position;
-			rigidBody = gameObject.GetComponent<Rigidbody2D> ();
-		}
+		currentPos = transform.position;
+		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 	}
 
 	protected virtual void Move () 

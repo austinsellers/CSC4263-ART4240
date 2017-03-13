@@ -2835,6 +2835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distance: 2
+  speed: 2
 --- !u!4 &2026416505 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4087112467849794, guid: ece83603515abb94ba751ef1d7e2089d,

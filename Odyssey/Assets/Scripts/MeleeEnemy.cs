@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedMovement : MonoBehaviour {
+public class MeleeEnemy : EnemyMovement {
 
-	// Use this for initialization
-	void Start () {
-		
+	string Name = "Ranged";
+	protected void Start () {
+		base.Start (Name);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		base.Move();
 	}
 }

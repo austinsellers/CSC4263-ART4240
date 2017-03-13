@@ -1883,9 +1883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6974cd7119b0ae94da9bea1b653b2190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: ed3c0f211bc3b3849af91b3f1d9b488c, type: 3}
-  cursorMode: 0
-  hotSpot: {x: 64, y: 64}
 --- !u!4 &1189443559
 Transform:
   m_ObjectHideFlags: 0
@@ -2924,6 +2921,26 @@ Prefab:
         type: 2}
       propertyPath: m_FlipX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61896688122941750, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -0.043163933
+      objectReference: {fileID: 0}
+    - target: {fileID: 61896688122941750, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.319088
+      objectReference: {fileID: 0}
+    - target: {fileID: 61896688122941750, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: -0.046102628
+      objectReference: {fileID: 0}
+    - target: {fileID: 61896688122941750, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.110376
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}

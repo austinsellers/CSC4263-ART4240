@@ -23,16 +23,14 @@ public class PlayerController : MonoBehaviour
 	{
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
-		animator = GetComponent<Animator> ();
+		animator = gameObject.GetComponent<Animator> ();
 
 	}
 
 	void Update () 
 	{
+		// Doesn't move until button is pressed
 		playerMove = false;
-		/*currentPos.x = Input.GetAxis ("Horizontal");
-		currentPos.y = Input.GetAxis ("Vertical");
-		rigidBody.velocity = Vector3.ClampMagnitude (currentPos, 1) * speed;*/
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
 			// Flips the sprite to face Left
@@ -46,6 +44,7 @@ public class PlayerController : MonoBehaviour
 			playerMove = true;
 			//this.transform.position = position;
 		}
+
 		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
 			// Flips the sprite to face Right
@@ -59,6 +58,7 @@ public class PlayerController : MonoBehaviour
 			playerMove = true;
 			//this.transform.position = position;
 		}
+
 		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 		{
 			currentPos.y += speed * Time.deltaTime;
@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 			playerMove = true;
 			//this.transform.position = position;
 		}
+
 		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
 		{
 			currentPos.y -= speed * Time.deltaTime;
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour
 			animator.SetBool ("playerLR", false);
 			animator.SetBool ("playerUD", true);
 		}
+		// Sets if the player is moving (For Animation)
 		animator.SetBool ("playerMove", playerMove);
 
 		rigidBody.MovePosition (currentPos);

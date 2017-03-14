@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 107206012}
   m_Layer: 8
   m_Name: RightOuterWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1385,7 +1385,7 @@ GameObject:
   - component: {fileID: 769566360}
   m_Layer: 8
   m_Name: TopOuterWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2185,7 +2185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: ed3c0f211bc3b3849af91b3f1d9b488c, type: 3}
   cursorMode: 0
-  hotSpot: {x: 0, y: 0}
+  hotSpot: {x: 65, y: 65}
 --- !u!4 &1189443559
 Transform:
   m_ObjectHideFlags: 0
@@ -2723,7 +2723,7 @@ GameObject:
   - component: {fileID: 1658165246}
   m_Layer: 8
   m_Name: BottomOuterWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3011,7 +3011,7 @@ GameObject:
   - component: {fileID: 1802291263}
   m_Layer: 8
   m_Name: LeftOuterWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3595,20 +3595,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114996506027546008, guid: 5f34cc92225301f4189c08a6341d183e,
+    - target: {fileID: 20985218318688940, guid: 5f34cc92225301f4189c08a6341d183e,
         type: 2}
-      propertyPath: playerSpeed
-      value: 6
+      propertyPath: m_CullingMask.m_Bits
+      value: 513
       objectReference: {fileID: 0}
-    - target: {fileID: 114996506027546008, guid: 5f34cc92225301f4189c08a6341d183e,
-        type: 2}
-      propertyPath: playerSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114996506027546008, guid: 5f34cc92225301f4189c08a6341d183e,
-        type: 2}
-      propertyPath: speed
-      value: 6
+    - target: {fileID: 1963692042374656, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}

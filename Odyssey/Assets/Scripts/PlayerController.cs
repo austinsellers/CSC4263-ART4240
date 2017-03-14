@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 	public float speed = 6f;
 	float movement;
 
+	public LayerMask blockingLayer;
 	Rigidbody2D rigidBody;
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
 			projectedPos += Vector2.down * movement;
 		
 		boxCollider.enabled = false;
-		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos);
+		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos, blockingLayer);
 		boxCollider.enabled = true;
 
 		if (hit.transform == null) 

@@ -50,7 +50,23 @@ public class PlayerController : MonoBehaviour
 			Move (direction);
 			playerMove = true;
 		}
+		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+		{
 
+			// If the player is facing Up
+			direction = 0;
+			Move (direction);
+			playerMove = true;
+			//this.transform.position = position;
+		}
+		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+		{
+			// If the player is facing Down
+			direction = 2;
+			Move (direction);
+			playerMove = true;
+			//this.transform.position = position;
+		}
 		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
 			// Flips the sprite to face Right
@@ -63,24 +79,9 @@ public class PlayerController : MonoBehaviour
 			//this.transform.position = position;
 		}
 
-		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-		{
 
-			// If the player is facing Up
-			direction = 0;
-			Move (direction);
-			playerMove = true;
-			//this.transform.position = position;
-		}
 
-		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-		{
-			// If the player is facing Down
-			direction = 2;
-			Move (direction);
-			playerMove = true;
-			//this.transform.position = position;
-		}
+
 
 		// If player is going left or right set that trigger (For Animation)
 		if (direction == 1 || direction == 3)
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour
 			BiteMake(direction);
 		}
 		print (projectedPos + " " + currentPos);
-		projectedPos.Set(currentPos.x,currentPos.y);
+
 	}
 
 	void Move(int dir)
@@ -114,12 +115,11 @@ public class PlayerController : MonoBehaviour
 		boxCollider.enabled = false;
 		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos);
 		boxCollider.enabled = true;
-
-		if (hit.transform == null ) 
-		{
-			currentPos.Set(projectedPos.x,projectedPos.y);
+		if (hit.transform == null) {
+			currentPos.Set (projectedPos.x, projectedPos.y);
 			rigidBody.MovePosition (currentPos);
-		}
+		} 
+		projectedPos.Set(currentPos.x,currentPos.y);
 	}
 
 	void BiteMake(int dir)

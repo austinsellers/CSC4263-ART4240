@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
-    public GameObject Bite;
+	public GameObject Bite;
 
 	public float speed = 6f;
 	float movement;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
 	{
 		// Doesn't move until button is pressed
 		playerMove = false;
-		projectedPos.Set(currentPos.x,currentPos.y);
+		//projectedPos.Set(currentPos.x,currentPos.y);
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
 			// Flips the sprite to face Left
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 		{
-			
+
 			// If the player is facing Up
 			direction = 0;
 			Move (direction);
@@ -101,10 +101,14 @@ public class PlayerController : MonoBehaviour
 
 		if(canMove)
 			rigidBody.MovePosition (currentPos);
-        if (Input.GetMouseButtonDown(0))
-            BiteMake(direction);
-
-    }
+		if (Input.GetMouseButtonDown(0))
+		{
+			BiteMake(direction);
+		}
+		print (projectedPos + " " + currentPos);
+		projectedPos.Set(currentPos.x,currentPos.y);
+		//print(
+	}
 
 	void Move(int dir)
 	{
@@ -117,12 +121,12 @@ public class PlayerController : MonoBehaviour
 			projectedPos += Vector2.up * movement;
 		if (dir == 2)
 			projectedPos += Vector2.down * movement;
-		
+
 		boxCollider.enabled = false;
 		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos, blockingLayer);
 		boxCollider.enabled = true;
 
-		if (hit.transform == null) 
+		if (hit.transform == null ) 
 		{
 			canMove = true;
 			currentPos.Set(projectedPos.x,projectedPos.y);
@@ -131,10 +135,10 @@ public class PlayerController : MonoBehaviour
 			canMove = false;
 	}
 
-    void BiteMake(int dir)
-    {
-        GameObject bite;
-        bite = (GameObject)Instantiate(Bite, currentPos, Quaternion.identity);
+	void BiteMake(int dir)
+	{
+		GameObject bite;
+		bite = (GameObject)Instantiate(Bite, currentPos, Quaternion.identity);
 
-    }
+	}
 }

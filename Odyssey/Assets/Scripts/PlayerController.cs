@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
-	public float speed = .05f;
+	public float speed = 6f;
+	float movement;
 	Rigidbody2D rigidBody;
-	Vector2 currentPos;
+	Vector2 currentPos,projectedPos;
+	BoxCollider2D boxCollider;
+	RaycastHit2D hit;
+	bool canMove = true;
 	SpriteRenderer renderer;
 	Animator animator;
 	/*
@@ -21,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
 	void Start () 
 	{
+		boxCollider = gameObject.GetComponent<BoxCollider2D> ();
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		animator = gameObject.GetComponent<Animator> ();
@@ -31,18 +36,16 @@ public class PlayerController : MonoBehaviour
 	{
 		// Doesn't move until button is pressed
 		playerMove = false;
+		projectedPos.Set(currentPos.x,currentPos.y);
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
 			// Flips the sprite to face Left
 			if (renderer.flipX)
 				renderer.flipX = false;
-			
-			currentPos.x -= speed * Time.deltaTime;
-
 			// If the player is facing Left
 			direction = 3;
+			Move (direction);
 			playerMove = true;
-			//this.transform.position = position;
 		}
 
 		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
@@ -50,31 +53,28 @@ public class PlayerController : MonoBehaviour
 			// Flips the sprite to face Right
 			if (!renderer.flipX)
 				renderer.flipX = true;
-			
-			currentPos.x += speed * Time.deltaTime;
-
 			// If the player is facing Right
 			direction = 1;
+			Move (direction);
 			playerMove = true;
 			//this.transform.position = position;
 		}
 
 		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 		{
-			currentPos.y += speed * Time.deltaTime;
-
+			
 			// If the player is facing Up
 			direction = 0;
+			Move (direction);
 			playerMove = true;
 			//this.transform.position = position;
 		}
 
 		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
 		{
-			currentPos.y -= speed * Time.deltaTime;
-
 			// If the player is facing Down
 			direction = 2;
+			Move (direction);
 			playerMove = true;
 			//this.transform.position = position;
 		}
@@ -92,7 +92,29 @@ public class PlayerController : MonoBehaviour
 		}
 		// Sets if the player is moving (For Animation)
 		animator.SetBool ("playerMove", playerMove);
-
+		if(canMove)
 		rigidBody.MovePosition (currentPos);
+	}
+	void Move(int dir)
+	{
+		movement = speed * Time.deltaTime;
+		if (dir == 3)
+			projectedPos += Vector2.left * movement;
+		if (dir == 1)
+			projectedPos += Vector2.right * movement;
+		if (dir == 0)
+			projectedPos += Vector2.up * movement;
+		if (dir == 2)
+			projectedPos += Vector2.down * movement;
+		boxCollider.enabled = false;
+		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos);
+		boxCollider.enabled = true;
+		if (hit.transform == null) 
+		{
+			canMove = true;
+			currentPos.Set(projectedPos.x,projectedPos.y);
+		}
+		else
+			canMove = false;
 	}
 }

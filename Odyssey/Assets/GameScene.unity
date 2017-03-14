@@ -3598,7 +3598,7 @@ Prefab:
     - target: {fileID: 20985218318688940, guid: 5f34cc92225301f4189c08a6341d183e,
         type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 513
+      value: 1537
       objectReference: {fileID: 0}
     - target: {fileID: 1963692042374656, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}
       propertyPath: m_TagString

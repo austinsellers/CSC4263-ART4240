@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
+    public GameObject Bite;
+
 	public float speed = 6f;
 	float movement;
 
@@ -98,7 +100,10 @@ public class PlayerController : MonoBehaviour
 
 		if(canMove)
 			rigidBody.MovePosition (currentPos);
-	}
+        if (Input.GetMouseButtonDown(0))
+            BiteMake(direction);
+
+    }
 
 	void Move(int dir)
 	{
@@ -124,4 +129,11 @@ public class PlayerController : MonoBehaviour
 		else
 			canMove = false;
 	}
+
+    void BiteMake(int dir)
+    {
+        GameObject bite;
+        bite = (GameObject)Instantiate(Bite, currentPos, Quaternion.identity);
+
+    }
 }

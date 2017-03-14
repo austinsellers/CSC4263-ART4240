@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 107206013}
   - component: {fileID: 107206012}
   m_Layer: 8
-  m_Name: TilePlaceholder (2)
+  m_Name: RightOuterWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1384,7 +1384,7 @@ GameObject:
   - component: {fileID: 769566361}
   - component: {fileID: 769566360}
   m_Layer: 8
-  m_Name: TilePlaceholder (1)
+  m_Name: TopOuterWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2722,7 +2722,7 @@ GameObject:
   - component: {fileID: 1658165247}
   - component: {fileID: 1658165246}
   m_Layer: 8
-  m_Name: TilePlaceholder (3)
+  m_Name: BottomOuterWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3010,7 +3010,7 @@ GameObject:
   - component: {fileID: 1802291260}
   - component: {fileID: 1802291263}
   m_Layer: 8
-  m_Name: wall
+  m_Name: LeftOuterWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

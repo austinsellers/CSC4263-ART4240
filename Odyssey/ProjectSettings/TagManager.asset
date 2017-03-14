@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - BlockingLayer
-  - 
+  - Minimap
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: Entities
     uniqueID: 3946505003
+    locked: 0
+  - name: Minimap
+    uniqueID: 363364763
     locked: 0
   - name: UI
     uniqueID: 3526570097

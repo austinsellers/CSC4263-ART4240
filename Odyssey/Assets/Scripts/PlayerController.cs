@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
-	public float speed = .05f;
+	public float playerSpeed = .05f;
 	Rigidbody2D rigidBody;
-	Vector2 currentPos;
+	Vector2 currentPos,projectedPos;
+	bool canMove = true;
+	RaycastHit2D hit;
 	SpriteRenderer renderer;
 	Animator animator;
 	/*
@@ -24,11 +26,12 @@ public class PlayerController : MonoBehaviour
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		animator = gameObject.GetComponent<Animator> ();
-
+		projectedPos = currentPos;
 	}
 
 	void Update () 
 	{
+		
 		// Doesn't move until button is pressed
 		playerMove = false;
 		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
@@ -36,9 +39,16 @@ public class PlayerController : MonoBehaviour
 			// Flips the sprite to face Left
 			if (renderer.flipX)
 				renderer.flipX = false;
-			
-			currentPos.x -= speed * Time.deltaTime;
-
+			projectedPos.x -= playerSpeed * Time.deltaTime;
+			hit = Physics2D.Linecast (currentPos, projectedPos);
+			if (hit.transform == null) 
+			{
+				currentPos.x -= playerSpeed * Time.deltaTime;
+				canMove = true;
+			}
+			else{
+				canMove = false;
+			}
 			// If the player is facing Left
 			direction = 3;
 			playerMove = true;
@@ -51,7 +61,7 @@ public class PlayerController : MonoBehaviour
 			if (!renderer.flipX)
 				renderer.flipX = true;
 			
-			currentPos.x += speed * Time.deltaTime;
+			currentPos.x += playerSpeed * Time.deltaTime;
 
 			// If the player is facing Right
 			direction = 1;
@@ -61,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 		{
-			currentPos.y += speed * Time.deltaTime;
+			currentPos.y += playerSpeed * Time.deltaTime;
 
 			// If the player is facing Up
 			direction = 0;
@@ -71,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
 		{
-			currentPos.y -= speed * Time.deltaTime;
+			currentPos.y -= playerSpeed * Time.deltaTime;
 
 			// If the player is facing Down
 			direction = 2;
@@ -92,7 +102,11 @@ public class PlayerController : MonoBehaviour
 		}
 		// Sets if the player is moving (For Animation)
 		animator.SetBool ("playerMove", playerMove);
-
-		rigidBody.MovePosition (currentPos);
+		print (canMove);
+		if (canMove) 
+		{
+			rigidBody.MovePosition (currentPos);
+		}
+		canMove = true;
 	}
 }

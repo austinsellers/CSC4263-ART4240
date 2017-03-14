@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour
 {
 	public float speed = 6f;
 	float movement;
+
 	Rigidbody2D rigidBody;
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
 	RaycastHit2D hit;
 	bool canMove = true;
+
 	SpriteRenderer renderer;
 	Animator animator;
 	/*
@@ -92,9 +94,12 @@ public class PlayerController : MonoBehaviour
 		}
 		// Sets if the player is moving (For Animation)
 		animator.SetBool ("playerMove", playerMove);
+		animator.SetInteger ("playerDir", direction);
+
 		if(canMove)
-		rigidBody.MovePosition (currentPos);
+			rigidBody.MovePosition (currentPos);
 	}
+
 	void Move(int dir)
 	{
 		movement = speed * Time.deltaTime;
@@ -106,9 +111,11 @@ public class PlayerController : MonoBehaviour
 			projectedPos += Vector2.up * movement;
 		if (dir == 2)
 			projectedPos += Vector2.down * movement;
+		
 		boxCollider.enabled = false;
 		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos);
 		boxCollider.enabled = true;
+
 		if (hit.transform == null) 
 		{
 			canMove = true;

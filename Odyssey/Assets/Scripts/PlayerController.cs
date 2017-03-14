@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
 	public float speed = 6f;
 	float movement;
 
-	public LayerMask blockingLayer;
 	Rigidbody2D rigidBody;
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
@@ -84,16 +83,11 @@ public class PlayerController : MonoBehaviour
 		}
 
 		// If player is going left or right set that trigger (For Animation)
-		if (direction == 1 || direction == 3) 
-		{
+		if (direction == 1 || direction == 3)
 			animator.SetBool ("playerLR", true);
-			animator.SetBool ("playerUD", false);
-		} 
 		else 
-		{
 			animator.SetBool ("playerLR", false);
-			animator.SetBool ("playerUD", true);
-		}
+		
 		// Sets if the player is moving (For Animation)
 		animator.SetBool ("playerMove", playerMove);
 		animator.SetInteger ("playerDir", direction);
@@ -118,7 +112,7 @@ public class PlayerController : MonoBehaviour
 			projectedPos += Vector2.down * movement;
 
 		boxCollider.enabled = false;
-		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos, blockingLayer);
+		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos);
 		boxCollider.enabled = true;
 
 		if (hit.transform == null ) 

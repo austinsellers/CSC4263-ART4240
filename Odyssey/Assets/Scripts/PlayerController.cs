@@ -14,10 +14,9 @@ public class PlayerController : MonoBehaviour
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
 	RaycastHit2D hit;
-	bool canMove = true;
-
 	SpriteRenderer renderer;
 	Animator animator;
+
 	/*
 	 * Starts out facing LEFT
 	 * Directions are like this:
@@ -98,16 +97,12 @@ public class PlayerController : MonoBehaviour
 		// Sets if the player is moving (For Animation)
 		animator.SetBool ("playerMove", playerMove);
 		animator.SetInteger ("playerDir", direction);
-
-		if(canMove)
-			rigidBody.MovePosition (currentPos);
 		if (Input.GetMouseButtonDown(0))
 		{
 			BiteMake(direction);
 		}
 		print (projectedPos + " " + currentPos);
 		projectedPos.Set(currentPos.x,currentPos.y);
-		//print(
 	}
 
 	void Move(int dir)
@@ -128,11 +123,9 @@ public class PlayerController : MonoBehaviour
 
 		if (hit.transform == null ) 
 		{
-			canMove = true;
 			currentPos.Set(projectedPos.x,projectedPos.y);
+			rigidBody.MovePosition (currentPos);
 		}
-		else
-			canMove = false;
 	}
 
 	void BiteMake(int dir)

@@ -338,9 +338,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.1289444, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1.5378797, y: 1.28}
 --- !u!50 &107206013
 Rigidbody2D:
   serializedVersion: 4
@@ -3013,9 +3013,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.4227867}
   serializedVersion: 2
-  m_Size: {x: 1.2800001, y: 1.28}
+  m_Size: {x: 1.2800001, y: 2.1255717}
 --- !u!50 &1658165247
 Rigidbody2D:
   serializedVersion: 4
@@ -3253,9 +3253,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.12894154, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 1.5378838, y: 1.28}
 --- !u!212 &1802291261
 SpriteRenderer:
   m_ObjectHideFlags: 0

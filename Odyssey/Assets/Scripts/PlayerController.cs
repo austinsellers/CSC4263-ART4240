@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 			projectedPos += Vector2.down * movement;
 
 		boxCollider.enabled = false;
-		hit = Physics2D.Linecast (new Vector2(currentPos.x,currentPos.y), projectedPos);
+		hit = Physics2D.Linecast (currentPos, projectedPos);
 		boxCollider.enabled = true;
 		if (hit.transform == null) {
 			currentPos.Set (projectedPos.x, projectedPos.y);

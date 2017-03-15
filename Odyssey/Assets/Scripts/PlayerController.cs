@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour 
 {
@@ -13,6 +14,10 @@ public class PlayerController : MonoBehaviour
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
 	RaycastHit2D hit;
+
+	public Text healthText;
+	private int health;
+
 	SpriteRenderer renderer;
 	Animator animator;
 
@@ -33,6 +38,8 @@ public class PlayerController : MonoBehaviour
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		animator = gameObject.GetComponent<Animator> ();
 
+		health = GameManager.instance.playerHealth;
+		healthText.text = "x " + health; 
 	}
 
 	void Update () 
@@ -127,5 +134,22 @@ public class PlayerController : MonoBehaviour
 		GameObject bite;
 		bite = (GameObject)Instantiate(Bite, currentPos, Quaternion.identity);
 
+	}
+
+	public void HurtPlayer(int amt)
+	{
+		animator.SetTrigger ("playerHurt");
+
+		health -= amt;
+
+		IsGameOver ();
+	}
+
+	private void IsGameOver()
+	{
+		if (health <= 0) 
+		{
+			GameManager.instance.GameOver ();
+		}
 	}
 }

@@ -130,7 +130,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 1537
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: e919abe33b65f624db63b4aa6f576205, type: 2}
   m_TargetDisplay: 0
@@ -209,10 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee178d92f4cd4a25a64ef5ca0d4c903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bite: {fileID: 0}
   speed: 6
-  blockingLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  healthText: {fileID: 0}
 --- !u!124 &124742117958041956
 Behaviour:
   m_ObjectHideFlags: 1

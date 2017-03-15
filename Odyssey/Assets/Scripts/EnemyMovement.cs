@@ -11,8 +11,9 @@ public abstract class EnemyMovement : MonoBehaviour
 	Vector2 localPosition;
 	Rigidbody2D rigidBody;
 	protected float speed;
+	bool isMoving;
 
-	protected virtual void Start()
+	protected virtual void Start() 
 	{
 		currentPos = transform.position;
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
@@ -22,12 +23,17 @@ public abstract class EnemyMovement : MonoBehaviour
 	{	
 		playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;	
 		localPosition = playerPos - currentPos;
-		if ( Mathf.Abs(localPosition.y) > distance || Mathf.Abs(localPosition.x) > distance) 
-		{
+		if (Mathf.Abs (localPosition.y) > distance || Mathf.Abs (localPosition.x) > distance) {
+			isMoving = true;
 			localPosition = localPosition.normalized;
 			currentPos.Set (currentPos.x += localPosition.x * speed * Time.deltaTime, currentPos.y += localPosition.y * speed * Time.deltaTime);
 			playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;	
 			rigidBody.MovePosition (currentPos);
+		} else {
+			isMoving = false;
 		}
+	}
+	protected virtual bool IsMoving(){
+		return isMoving;
 	}
 }

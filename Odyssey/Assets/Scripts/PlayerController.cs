@@ -136,8 +136,7 @@ public class PlayerController : MonoBehaviour
 
 	public void HurtPlayer(int amt)
 	{
-		//animator.SetTrigger ("playerHurt");
-
+		animator.SetTrigger ("playerHit");
 		health -= amt;
 		healthText.text = "x " + health;
 		IsGameOver ();

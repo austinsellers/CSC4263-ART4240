@@ -142,6 +142,8 @@ public class PlayerController : MonoBehaviour
 
 		health -= amt;
 
+		healthText.text = "x " + health;
+
 		IsGameOver ();
 	}
 

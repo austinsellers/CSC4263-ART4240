@@ -103,8 +103,6 @@ public class PlayerController : MonoBehaviour
 		{
 			BiteMake(direction);
 		}
-		print (projectedPos + " " + currentPos);
-
 	}
 
 	void Move(int dir)
@@ -138,12 +136,10 @@ public class PlayerController : MonoBehaviour
 
 	public void HurtPlayer(int amt)
 	{
-		animator.SetTrigger ("playerHurt");
+		//animator.SetTrigger ("playerHurt");
 
 		health -= amt;
-
 		healthText.text = "x " + health;
-
 		IsGameOver ();
 	}
 

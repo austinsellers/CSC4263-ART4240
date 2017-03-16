@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
 	SpriteRenderer renderer;
 	Animator animator;
+	Transform playerTransform;
 
 	/*
 	 * Starts out facing LEFT
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 	 * 		6	2	5
 	 */
 	private int direction = 3;
+	private Vector3 rotat = new Vector3 (0f, 0f, 0f);
 	private bool playerMove = false;
 
 	void Start () 
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		animator = gameObject.GetComponent<Animator> ();
+		playerTransform = gameObject.GetComponent<Transform> ();
 
 		normalColor = renderer.color;
 
@@ -52,35 +55,31 @@ public class PlayerController : MonoBehaviour
 		//projectedPos.Set(currentPos.x,currentPos.y);
 		if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)))
 		{
-			direction = 0;
-			Move (direction);
-			direction = 3;
-			Move (direction);
-			playerMove = true;
+			direction = 7;
+			Move (0); // Move UP
+			Move (3); // Move LEFT
+			Rotate(45f);
 		}
 		else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) && (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)))
 		{
-			direction = 0;
-			Move (direction);
-			direction = 1;
-			Move (direction);
-			playerMove = true;
+			direction = 4;
+			Move (0); // Move UP
+			Move (1); // Move RIGHT
+			Rotate(-45f);
 		}
 		else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)))
 		{
-			direction = 2;
-			Move (direction);
-			direction = 1;
-			Move (direction);
-			playerMove = true;
+			direction = 5;
+			Move (2); // Move DOWN
+			Move (1); // Move RIGHT
+			// TODO: Down/Right rotation
 		}
 		else if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)))
 		{
-			direction = 2;
-			Move (direction);
-			direction = 3;
-			Move (direction);
-			playerMove = true;
+			direction = 6;
+			Move (2); // Move DOWN
+			Move (3); // Move LEFT
+			// TODO: Down/Left rotation
 		}
 		else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
@@ -90,24 +89,24 @@ public class PlayerController : MonoBehaviour
 			// If the player is facing Left
 			direction = 3;
 			Move (direction);
-			playerMove = true;
+			// Reset Rotation
+			Rotate(0f);
 		}
 		else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 		{
-
 			// If the player is facing Up
 			direction = 0;
 			Move (direction);
-			playerMove = true;
-			//this.transform.position = position;
+			// Reset Rotation
+			Rotate(0f);
 		}
 		else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
 		{
 			// If the player is facing Down
 			direction = 2;
 			Move (direction);
-			playerMove = true;
-			//this.transform.position = position;
+			// Reset Rotation
+			Rotate(0f);
 		}
 		else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
@@ -117,8 +116,8 @@ public class PlayerController : MonoBehaviour
 			// If the player is facing Right
 			direction = 1;
 			Move (direction);
-			playerMove = true;
-			//this.transform.position = position;
+			// Reset Rotation
+			Rotate(0f);
 		}
 		// If player is going left or right set that trigger (For Animation)
 		if (direction == 1 || direction == 3)
@@ -135,8 +134,15 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	void Rotate(float angle) 
+	{
+		rotat.z = angle;
+		playerTransform.rotation = Quaternion.Euler(rotat);
+	}
+
 	void Move(int dir)
 	{
+		playerMove = true;
 		movement = speed * Time.deltaTime;
 
 		if (dir == 3)

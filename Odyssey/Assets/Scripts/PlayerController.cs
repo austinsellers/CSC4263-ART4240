@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
 	/*
 	 * Starts out facing LEFT
 	 * Directions are like this:
-	 * 			0
+	 * 		7	0	4
 	 * 		3		1
-	 * 			2
+	 * 		6	2	5
 	 */
 	private int direction = 3;
 	private bool playerMove = false;
@@ -50,7 +50,39 @@ public class PlayerController : MonoBehaviour
 		// Doesn't move until button is pressed
 		playerMove = false;
 		//projectedPos.Set(currentPos.x,currentPos.y);
-		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+		if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)))
+		{
+			direction = 0;
+			Move (direction);
+			direction = 3;
+			Move (direction);
+			playerMove = true;
+		}
+		else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) && (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)))
+		{
+			direction = 0;
+			Move (direction);
+			direction = 1;
+			Move (direction);
+			playerMove = true;
+		}
+		else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)))
+		{
+			direction = 2;
+			Move (direction);
+			direction = 1;
+			Move (direction);
+			playerMove = true;
+		}
+		else if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)))
+		{
+			direction = 2;
+			Move (direction);
+			direction = 3;
+			Move (direction);
+			playerMove = true;
+		}
+		else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{
 			// Flips the sprite to face Left
 			if (renderer.flipX)
@@ -60,7 +92,7 @@ public class PlayerController : MonoBehaviour
 			Move (direction);
 			playerMove = true;
 		}
-		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+		else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
 		{
 
 			// If the player is facing Up
@@ -69,7 +101,7 @@ public class PlayerController : MonoBehaviour
 			playerMove = true;
 			//this.transform.position = position;
 		}
-		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+		else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
 		{
 			// If the player is facing Down
 			direction = 2;
@@ -77,7 +109,7 @@ public class PlayerController : MonoBehaviour
 			playerMove = true;
 			//this.transform.position = position;
 		}
-		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+		else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
 			// Flips the sprite to face Right
 			if (!renderer.flipX)
@@ -88,11 +120,6 @@ public class PlayerController : MonoBehaviour
 			playerMove = true;
 			//this.transform.position = position;
 		}
-
-
-
-
-
 		// If player is going left or right set that trigger (For Animation)
 		if (direction == 1 || direction == 3)
 			animator.SetBool ("playerLR", true);
@@ -111,6 +138,7 @@ public class PlayerController : MonoBehaviour
 	void Move(int dir)
 	{
 		movement = speed * Time.deltaTime;
+
 		if (dir == 3)
 			projectedPos += Vector2.left * movement;
 		if (dir == 1)

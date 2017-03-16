@@ -58,14 +58,14 @@ public class PlayerController : MonoBehaviour
 			direction = 7;
 			Move (0); // Move UP
 			Move (3); // Move LEFT
-			Rotate(45f);
+			Rotate(30f);
 		}
 		else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) && (Input.GetKey (KeyCode.UpArrow) || Input.GetKey (KeyCode.W)))
 		{
 			direction = 4;
 			Move (0); // Move UP
 			Move (1); // Move RIGHT
-			Rotate(-45f);
+			Rotate(-30f);
 		}
 		else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey (KeyCode.D)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)))
 		{

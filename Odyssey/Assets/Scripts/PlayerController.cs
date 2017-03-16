@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	public float speed = 6f;
 	float movement;
 
+	Color normalColor;
 	Rigidbody2D rigidBody;
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		animator = gameObject.GetComponent<Animator> ();
+
+		normalColor = renderer.color;
 
 		health = GameManager.instance.playerHealth;
 		healthText.text = "x " + health; 
@@ -143,9 +146,19 @@ public class PlayerController : MonoBehaviour
 	public void HurtPlayer(int amt)
 	{
 		animator.SetTrigger ("playerHit");
+
+		StartCoroutine (ChangeColor());
+
 		health -= amt;
 		healthText.text = "x " + health;
 		IsGameOver ();
+	}
+
+	IEnumerator ChangeColor() 
+	{
+		renderer.color = new Color (237/255.0f, 95/255.0f, 85/255.0f);
+		yield return new WaitForSecondsRealtime(0.2f);
+		renderer.color = normalColor;
 	}
 
 	private void IsGameOver()

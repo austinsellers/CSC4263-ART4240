@@ -136,8 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee178d92f4cd4a25a64ef5ca0d4c903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bite: {fileID: 0}
+  Bite: {fileID: 1400465516519578, guid: 6af68c0c56685094b9d31dff071bf043, type: 2}
+  Bark: {fileID: 1366773005243472, guid: 252b3afd03227c24ca4a12def528a848, type: 2}
   speed: 6
+  barkSpd: 1000
   healthText: {fileID: 0}
 --- !u!212 &212031253000156982
 SpriteRenderer:

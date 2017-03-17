@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     bool ableToBite = true;
     float lastBark;
     float lastBite;
-    float barkDelay = .5f;
-    float biteDelay = .5f;
+	public float barkDelay = .5f;
+	public float biteDelay = .5f;
 	float movement;
 
 	Color normalColor;

@@ -140,6 +140,8 @@ MonoBehaviour:
   Bark: {fileID: 1366773005243472, guid: 252b3afd03227c24ca4a12def528a848, type: 2}
   speed: 6
   barkSpd: 1000
+  barkDelay: 0.5
+  biteDelay: 0.5
   healthText: {fileID: 0}
 --- !u!212 &212031253000156982
 SpriteRenderer:

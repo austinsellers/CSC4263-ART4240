@@ -198,11 +198,13 @@ public class PlayerController : MonoBehaviour
         if (dir < 4)
         {
             bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
-        }
+			bite.transform.parent = gameObject.transform;
+		}
         else
         {
             bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + 2 * Mathf.Sin(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4)), currentPos.y + 2 * Mathf.Cos(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4f)), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
-        }
+			bite.transform.parent = gameObject.transform;
+		}
     }
 
     void BarkMake(int dir)

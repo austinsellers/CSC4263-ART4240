@@ -6,7 +6,7 @@ public class BarkBehavior : MonoBehaviour
 {
     float startTime;
     public float timeExisting;
-
+    public int damage = 1;
 
     void Start()
     {
@@ -18,4 +18,14 @@ public class BarkBehavior : MonoBehaviour
         if ((Time.time - startTime) > timeExisting)
             DestroyImmediate(gameObject);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
+            Destroy(gameObject);
+        } 
+    }
+
 }

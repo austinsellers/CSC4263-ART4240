@@ -5,7 +5,7 @@ using UnityEngine;
 public class BiteBehavior : MonoBehaviour {
     float startTime;
     public float timeExisting;
-
+    public int damage = 3;
 
 	void Start ()
     {

@@ -7,6 +7,7 @@ public class MeleeEnemy : EnemyMovement
 	public float distance = 2f;
 	public float speed = 2f;
 	public int damage = 1;
+    public int health;
 	float attackRate = 3f;
 	float nextAttack;
 	GameObject player;
@@ -27,8 +28,7 @@ public class MeleeEnemy : EnemyMovement
 		}
 		else {
 			nextAttack = Time.time + attackRate;
-		}
-
+		}        
 	}
 
 	void attack() {
@@ -37,4 +37,12 @@ public class MeleeEnemy : EnemyMovement
 			nextAttack = Time.time + attackRate;
 		}
 	}
+
+    public void takeDamage(int damage)
+    {
+        if (health > 0)
+            health = health - damage;
+        else
+            DestroyImmediate(gameObject);
+    }
 }

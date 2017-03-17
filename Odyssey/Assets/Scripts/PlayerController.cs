@@ -116,7 +116,8 @@ public class PlayerController : MonoBehaviour
 			// Sets if the player is moving (For Animation)
 			animator.SetBool ("playerMove", playerMove);
 			animator.SetInteger ("playerDir", direction);
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetKey(KeyCode.J))
+            {
 				BiteMake (direction);
 			}
 		}
@@ -155,14 +156,8 @@ public class PlayerController : MonoBehaviour
 	void BiteMake(int dir)
 	{
         GameObject bite;
-        if (dir == 0)
-            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x, currentPos.y+2f, -5f), new Quaternion(0f,0f, (-Mathf.PI/6) ,0f));
-        else if (dir == 1)
-            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x+2f, currentPos.y, -5f), new Quaternion(0f, 0f, (Mathf.PI / 4) - (Mathf.PI / 6), 0f));
-        else if (dir == 2)
-            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x, currentPos.y-2f, -5f), new Quaternion(0f, 0f, (Mathf.PI) - (Mathf.PI / 6), 0f));
-        else if (dir == 3)
-            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x-2f, currentPos.y, -5f), new Quaternion(0f, 0f, (3 * Mathf.PI / 4) - (Mathf.PI / 6), 0f));
+
+        bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x+2*Mathf.Sin(dir*Mathf.PI/2f), currentPos.y + 2*Mathf.Cos(dir*Mathf.PI/2f), -5f), new Quaternion(0f, 0f, (dir*-Mathf.PI / 6), 0f));
     }
 
 	public void HurtPlayer(int amt)

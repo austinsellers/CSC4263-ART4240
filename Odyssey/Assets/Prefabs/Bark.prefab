@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114119487292117520}
   - component: {fileID: 50925767296418192}
   - component: {fileID: 60894829425169796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bark
   m_TagString: Untagged
   m_Icon: {fileID: 0}

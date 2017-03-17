@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 212877854078662502}
   - component: {fileID: 114146242950701806}
   - component: {fileID: 60332035513748434}
-  m_Layer: 0
+  - component: {fileID: 95838019676190886}
+  m_Layer: 8
   m_Name: Bite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,6 +60,23 @@ PolygonCollider2D:
     - - {x: -0.43301272, y: -0.24999994}
       - {x: 0.43301272, y: -0.25000003}
       - {x: 0, y: 0.5}
+--- !u!95 &95838019676190886
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400465516519578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d43c8b34d64f504681783decca4cc81, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114146242950701806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108c54075dccaa645a7044899c766e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeExisting: 0
+  timeExisting: 0.25
 --- !u!212 &212877854078662502
 SpriteRenderer:
   m_ObjectHideFlags: 1

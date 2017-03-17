@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 	 * 		3		1
 	 * 		6	2	5
 	 */
-	private int direction = 3;
+	private int direction = 2;
 	private Vector3 rotat = new Vector3 (0f, 0f, 0f);
 	private bool playerMove = false;
 
@@ -72,14 +72,14 @@ public class PlayerController : MonoBehaviour
 			direction = 5;
 			Move (2); // Move DOWN
 			Move (1); // Move RIGHT
-			// TODO: Down/Right rotation
+			Rotate(30f);
 		}
 		else if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)) && (Input.GetKey (KeyCode.DownArrow) || Input.GetKey (KeyCode.S)))
 		{
 			direction = 6;
 			Move (2); // Move DOWN
 			Move (3); // Move LEFT
-			// TODO: Down/Left rotation
+			Rotate(-30f);
 		}
 		else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
 		{

@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour 
 {
-	public GameObject Bite;
+    public GameObject Bite;
+    public GameObject Bark;
 
 	public float speed = 6f;
+    public float barkSpd =1f;
 	float movement;
 
 	Color normalColor;
@@ -120,7 +122,11 @@ public class PlayerController : MonoBehaviour
             {
 				BiteMake (direction);
 			}
-		}
+            if (Input.GetKey(KeyCode.K))
+            {
+                BarkMake(direction);
+            }
+        }
 	}
 
 	void Rotate(float angle) 
@@ -156,11 +162,34 @@ public class PlayerController : MonoBehaviour
 	void BiteMake(int dir)
 	{
         GameObject bite;
-
-        bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x+2*Mathf.Sin(dir*Mathf.PI/2f), currentPos.y + 2*Mathf.Cos(dir*Mathf.PI/2f), -5f), new Quaternion(0f, 0f, (dir*-Mathf.PI / 6), 0f));
+        if (dir < 4)
+        {
+            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
+        }
+        else
+        {
+            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + 2 * Mathf.Sin(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4)), currentPos.y + 2 * Mathf.Cos(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4f)), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
+        }
+        Debug.Log(dir);
     }
 
-	public void HurtPlayer(int amt)
+    void BarkMake(int dir)
+    {
+        GameObject bark;
+        if (dir < 4)
+        {
+            bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
+            bark.GetComponent<Rigidbody2D>().AddForce(new Vector2 (barkSpd * Mathf.Sin(dir * Mathf.PI / 2f), barkSpd * Mathf.Cos(dir * Mathf.PI / 2f)));
+        }
+        else
+        {
+            bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), currentPos.y + 2 * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
+            bark.GetComponent<Rigidbody2D>().AddForce(new Vector2(barkSpd * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), barkSpd * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4)));
+        }
+        
+    }
+
+    public void HurtPlayer(int amt)
 	{
 		animator.SetTrigger ("playerHit");
 

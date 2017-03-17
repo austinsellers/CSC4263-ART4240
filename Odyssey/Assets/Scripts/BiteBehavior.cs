@@ -6,6 +6,7 @@ public class BiteBehavior : MonoBehaviour {
     float startTime;
     public float timeExisting;
     public int damage = 3;
+    bool didDamage = false;
 
 	void Start ()
     {
@@ -17,4 +18,13 @@ public class BiteBehavior : MonoBehaviour {
         if ((Time.time - startTime) > timeExisting)
             DestroyImmediate(gameObject);
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy" && !didDamage)
+        {
+            didDamage = false;
+            other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
+        }
+    }
 }

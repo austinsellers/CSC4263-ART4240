@@ -40,9 +40,10 @@ public class MeleeEnemy : EnemyMovement
 
     public void takeDamage(int damage)
     {
-        if (health > 0)
-            health = health - damage;
-        else
-            DestroyImmediate(gameObject);
+        health = health - damage;
+        if(health<1)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -49,8 +49,7 @@ public class PlayerController : MonoBehaviour
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		animator = gameObject.GetComponent<Animator> ();
 		playerTransform = gameObject.GetComponent<Transform> ();
-		currentPos = new Vector2 (playerTransform.position.x, playerTransform.position.y);
-		projectedPos = new Vector2 (playerTransform.position.x, playerTransform.position.y);
+
 		normalColor = renderer.color;
 
 		health = GameManager.instance.playerHealth;

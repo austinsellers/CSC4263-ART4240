@@ -7560,7 +7560,7 @@ GameObject:
   - component: {fileID: 905949940}
   m_Layer: 0
   m_Name: TilePlaceholder
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9707,7 +9707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 10
   playerExperience: 0
-  pauseCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 1569582180}
 --- !u!1001 &1192245260
 Prefab:
   m_ObjectHideFlags: 0
@@ -15368,7 +15368,7 @@ GameObject:
   - component: {fileID: 1897403561}
   m_Layer: 0
   m_Name: TilePlaceholder (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15451,7 +15451,6 @@ GameObject:
   - component: {fileID: 1910447671}
   - component: {fileID: 1910447670}
   - component: {fileID: 1910447669}
-  - component: {fileID: 1910447673}
   m_Layer: 5
   m_Name: Main Canvas
   m_TagString: Untagged
@@ -15535,21 +15534,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1910447673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1910447668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  distance: 2
-  speed: 2
-  damage: 1
 --- !u!1001 &1924131995
 Prefab:
   m_ObjectHideFlags: 0
@@ -15806,10 +15790,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   distance: 2
   speed: 2
   damage: 1
+  health: 100
 --- !u!1 &1976099639
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
 	private GameObject player;
 	Vector3 offset;
 
-	public BoxCollider2D boundBox;
+	private BoxCollider2D boundBox;
 	private Vector3 minBounds;
 	private Vector3 maxBounds;
 
@@ -18,6 +18,7 @@ public class CameraFollow : MonoBehaviour
 
 	void Start () 
 	{
+		boundBox = GameObject.Find("Map Bounds").GetComponent<BoxCollider2D>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		offset = transform.position - player.transform.position;
 		minBounds = boundBox.bounds.min;

@@ -5,19 +5,26 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour 
 {
-	public int currentLevel;
+	private int currentLevel;
+	private int currentExp;
+	private int[] toLevelUp;
+	private float fillAmount;
 
-	public int currentExp;
+	private Image content;
+	private Text expText;
 
-	public int[] toLevelUp;
+	private GameObject maskObj;
 
-	public float fillAmount;
+	public float lerpSpeed = 2f;
 
-	public Image content;
+	void Awake() 
+	{
+		toLevelUp = new int[10] { 0, 20, 50, 100, 250, 500, 1000, 1750, 2500, 3500 };
 
-	public Text expText;
-
-	public float lerpSpeed;
+		maskObj = transform.FindChild ("Experience Bar").transform.FindChild ("Mask").gameObject;
+		content = maskObj.transform.FindChild("Content").GetComponent<Image>();
+		expText = maskObj.GetComponentInChildren<Text>();
+	}
 
 	void Update () 
 	{
@@ -59,5 +66,15 @@ public class PlayerStats : MonoBehaviour
 	private float MapExp(float value, float inMin, float inMax)
 	{
 		return (value - inMin) * 1f / (inMax - inMin);
+	}
+
+	public int getCurrentLevel()
+	{
+		return currentLevel;
+	}
+
+	public int getCurrentExp()
+	{
+		return currentExp;
 	}
 }

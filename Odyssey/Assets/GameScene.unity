@@ -16092,13 +16092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a9fd01fb5468c47a384b148969a0b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
-  currentExp: 0
-  toLevelUp: 
-  fillAmount: 0
-  content: {fileID: 0}
-  expText: {fileID: 0}
-  lerpSpeed: 0
+  lerpSpeed: 2
 --- !u!1001 &1924131995
 Prefab:
   m_ObjectHideFlags: 0

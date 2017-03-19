@@ -16,11 +16,16 @@ public abstract class EnemyMovement : MonoBehaviour
 	RaycastHit2D hit;
 	bool isMoving;
 
+	protected PlayerStats playerStats;
+	public int expToGive;
+
 	protected virtual void Start() 
 	{
 		currentPos = transform.position;
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		boxCollider = gameObject.GetComponent<BoxCollider2D> ();
+
+		playerStats = FindObjectOfType<PlayerStats> ();
 	}
 
 	protected virtual void Move () 

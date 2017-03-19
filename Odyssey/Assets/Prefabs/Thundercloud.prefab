@@ -118,9 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expToGive: 10
   distance: 4.5
   speed: 2
   damage: 1
+  health: 1
 --- !u!212 &212372013472414810
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212802232026425534}
   - component: {fileID: 50750279892143920}
   - component: {fileID: 61036706655544870}
-  - component: {fileID: 114715665419408808}
+  - component: {fileID: 114930875231348940}
   m_Layer: 8
   m_Name: Lawnmower
   m_TagString: Enemy
@@ -107,7 +107,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.37, y: 3.36}
---- !u!114 &114715665419408808
+--- !u!114 &114930875231348940
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,9 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expToGive: 40
   distance: 2
   speed: 2
   damage: 1
+  health: 100
 --- !u!212 &212802232026425534
 SpriteRenderer:
   m_ObjectHideFlags: 1

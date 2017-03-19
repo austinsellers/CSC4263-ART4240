@@ -7,6 +7,7 @@ TagManager:
   - Reticle
   - Enemy
   - Wall
+  - AIHelper
   layers:
   - Default
   - TransparentFX

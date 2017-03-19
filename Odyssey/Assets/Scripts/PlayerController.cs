@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	public float barkDelay = .5f;
 	public float biteDelay = .5f;
 	float movement;
+    float distanceFromAtk = 1.5f;
 
 	Color normalColor;
 	Rigidbody2D rigidBody;
@@ -196,13 +197,13 @@ public class PlayerController : MonoBehaviour
         GameObject bite;
         if (dir < 4)
         {
-            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, 0f ,0f));
+            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + distanceFromAtk * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, 0f ,0f));
 			bite.transform.parent = gameObject.transform;
             bite.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * -90f));
         }
         else
         {
-            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + 2 * Mathf.Sin(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4)), currentPos.y + 2 * Mathf.Cos(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4f)), -5f), new Quaternion(0f, 0f, 0f, 0f));
+            bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4)), currentPos.y + distanceFromAtk * Mathf.Cos(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4f)), -5f), new Quaternion(0f, 0f, 0f, 0f));
 			bite.transform.parent = gameObject.transform;
             bite.GetComponent<Transform>().Rotate(new Vector3(0f,0f,(dir-4)*-90f - 45f ));
 		}

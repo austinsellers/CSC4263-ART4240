@@ -23,7 +23,10 @@ public class BarkBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
+            if (other.gameObject.GetComponent<MeleeEnemy>() != null)
+                other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
+            if (other.gameObject.GetComponent<RangedEnemy>() != null)
+                other.gameObject.GetComponent<RangedEnemy>().takeDamage(damage);
             Destroy(gameObject);
         } 
     }

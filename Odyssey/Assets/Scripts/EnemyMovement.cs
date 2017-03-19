@@ -65,7 +65,7 @@ public abstract class EnemyMovement : MonoBehaviour
 			isMoving = false;
 		}
 	}
-	protected virtual bool IsMoving()
+	protected bool IsMoving()
 	{
 		return isMoving;
 	}
@@ -95,5 +95,10 @@ public abstract class EnemyMovement : MonoBehaviour
 				rigidBody.MovePosition (currentPos);
 			}  
 		}
+	}
+
+	public Vector2 getPlayerPos()
+	{
+		return playerPos;
 	}
 }

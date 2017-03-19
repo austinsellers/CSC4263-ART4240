@@ -249,4 +249,9 @@ public class PlayerController : MonoBehaviour
 			GameManager.instance.GameOver ();
 		}
 	}
+
+	public Vector2 getPosition ()
+	{
+		return transform.position;
+	}
 }

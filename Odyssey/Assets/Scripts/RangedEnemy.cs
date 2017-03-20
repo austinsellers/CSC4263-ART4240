@@ -7,6 +7,7 @@ public class RangedEnemy : EnemyMovement
 	public float distance = 2f;
 	public float speed = 2f;
 	public int damage = 1;
+	public string type = "Ranged";
 	public int health;
 	public float warnTimeSeconds = 1f;
 	float attackRate = 2f;
@@ -20,6 +21,7 @@ public class RangedEnemy : EnemyMovement
 	protected void Awake () {
 		base.distance = distance;
 		base.speed = speed;
+		base.type = type;
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerController = player.GetComponent<PlayerController>();
 	}

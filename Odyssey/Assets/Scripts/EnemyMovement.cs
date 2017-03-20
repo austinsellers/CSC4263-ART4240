@@ -4,26 +4,29 @@ using UnityEngine;
 
 public abstract class EnemyMovement : MonoBehaviour 
 {
-
-	Vector2 playerPos;
 	protected float distance;
+	protected float speed;
+	protected string type;
+	protected Animator animator;
+	protected PlayerStats playerStats;
+
+	Vector2 playerPos;	
 	Vector2 currentPos;
 	Vector2 localPosition;
 	Vector2 projectedPos;
+
 	BoxCollider2D boxCollider;
 	Rigidbody2D rigidBody;
-	protected Animator animator;
-
-	protected float speed;
 	RaycastHit2D hit;
-	Bounds NearWall;
-	bool isMoving;
-	protected PlayerStats playerStats;
+
+	private int dir;
+	private bool isMoving;
 	public int expToGive;
-	bool lockY = false,lockX = false;
+	private bool lockY = false,lockX = false;
+
+
 	protected virtual void Start() 
 	{
-		//NearWall = GameObject.FindGameObjectWithTag ("AIHelper").GetComponent<BoxCollider2D>().bounds;
 		currentPos = transform.position;
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		boxCollider = gameObject.GetComponent<BoxCollider2D> ();
@@ -31,44 +34,26 @@ public abstract class EnemyMovement : MonoBehaviour
 
 		playerStats = FindObjectOfType<PlayerStats> ();
 	}
-
-	void OnTriggerEnter(Collider other) {
-		print ("here");
-		//Destroy(other.gameObject);
-	}
+		
 
 	protected virtual void Move () 
 	{	
 		
 		playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;	
-		//NearWall = GameObject.FindGameObjectWithTag ("AIHelper").transform.position;
 		localPosition = distanceAway ();
-		//print (NearWall);
 		if (Mathf.Abs (localPosition.y) > distance || Mathf.Abs (localPosition.x) > distance) 
 		{
 			isMoving = true;
-			//print (NearWall);
-			if (((currentPos.x > -5 && currentPos.x < 1) && (currentPos.y < 3 && currentPos.y > -16))) {}
-				//lockX = true;
-				//MoveX (0);
-				//MoveY (1);
-				//lockX = false;
 			localPosition = localPosition.normalized;
 			MoveX (1);
 			MoveY (1);
-			//else
-			//	isMoving = false;
-
-			//playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;	
-			//rigidBody.MovePosition (currentPos);
-			//print(distanceAway());
 			projectedPos.Set(currentPos.x,currentPos.y);} 
 		else 
 		{
 			isMoving = false;
 		}
 	}
-	protected bool IsMoving()
+	protected virtual bool IsMoving()
 	{
 		return isMoving;
 	}
@@ -80,28 +65,52 @@ public abstract class EnemyMovement : MonoBehaviour
 	void MoveX(int loc)
 	{
 		if (!lockX) {
-			projectedPos.Set (currentPos.x + localPosition.x*loc * speed * Time.deltaTime, currentPos.y);
+			projectedPos.Set (currentPos.x + localPosition.x * loc * speed * Time.deltaTime, currentPos.y);
 			hit = Physics2D.Linecast (currentPos, projectedPos);
-			if (hit.transform == null) {
-				currentPos.Set (projectedPos.x, currentPos.y);
-				rigidBody.MovePosition (currentPos);
-			}  
+			if (hit.transform != null)
+				print (hit.transform.name);
+			if (!type.Equals ("Ranged")) {
+				if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) {
+					currentPos.Set (projectedPos.x, currentPos.y);
+					rigidBody.MovePosition (currentPos);
+				} 
+			} else {
+				if (hit.transform == null) {
+					currentPos.Set (projectedPos.x, currentPos.y);
+					rigidBody.MovePosition (currentPos);
+				} 
+			}
 		}
 	}
 	void MoveY (int loc)
 	{
 		if (!lockY) {
-			projectedPos.Set (currentPos.x, currentPos.y + localPosition.y* loc * speed * Time.deltaTime);
-			hit = Physics2D.Linecast (currentPos, projectedPos);
-			if (hit.transform == null) {
-				currentPos.Set (currentPos.x, projectedPos.y);
-				rigidBody.MovePosition (currentPos);
-			}  
-		}
-	}
 
-	public Vector2 getPlayerPos()
-	{
-		return playerPos;
+			if (lockX) {
+				if (currentPos.y >= 2 && dir == 1) {
+					lockX = false;
+				} else if (currentPos.y <= -15 && dir == -1) {
+					lockX = false;
+				}
+				currentPos.Set (currentPos.x, currentPos.y + dir * speed * Time.deltaTime);
+				rigidBody.MovePosition (currentPos);
+			} else {
+				projectedPos.Set (currentPos.x, currentPos.y + localPosition.y * loc * speed * Time.deltaTime);
+				hit = Physics2D.Linecast (currentPos, projectedPos);
+				if (!type.Equals ("Ranged")) {
+					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) {
+						currentPos.Set (currentPos.x, projectedPos.y);
+						rigidBody.MovePosition (currentPos);
+					}  
+				}else {
+					if (hit.transform != null)
+						print (hit.transform.name);
+					if (hit.transform == null) {
+						currentPos.Set (currentPos.x, projectedPos.y);
+						rigidBody.MovePosition (currentPos);
+					} 
+				}
+			}
+		}
 	}
 }

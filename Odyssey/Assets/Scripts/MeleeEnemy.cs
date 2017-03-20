@@ -7,6 +7,7 @@ public class MeleeEnemy : EnemyMovement
 	public float distance = 2f;
 	public float speed = 2f;
 	public int damage = 1;
+	public string type = "Melee";
     public int health;
 	float attackRate = 3f;
 	float nextAttack;
@@ -16,6 +17,7 @@ public class MeleeEnemy : EnemyMovement
 	protected void Awake () {
 		base.distance = distance;
 		base.speed = speed;
+		base.type = type;
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerController = player.GetComponent<PlayerController>();
 	}

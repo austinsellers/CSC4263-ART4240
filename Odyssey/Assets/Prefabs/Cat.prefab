@@ -140,6 +140,7 @@ MonoBehaviour:
   distance: 2
   speed: 2
   damage: 1
+  type: Melee
   health: 15
 --- !u!212 &212066514390889570
 SpriteRenderer:
@@ -207,7 +208,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348462293
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7d6a7bf6ada4ca42bb8743aff9b6e98, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2af45f6f458c1734793a92fc6ecb3175, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

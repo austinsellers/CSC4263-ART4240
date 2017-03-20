@@ -43,6 +43,12 @@ public abstract class EnemyMovement : MonoBehaviour
 		localPosition = distanceAway ();
 		if (Mathf.Abs (localPosition.y) > distance || Mathf.Abs (localPosition.x) > distance) 
 		{
+			if (localPosition.x >= 0) {
+				transform.localRotation = Quaternion.Euler (0, 180, 0);
+			}
+			if (localPosition.x < 0) {
+				transform.localRotation = Quaternion.Euler (0, 0, 0);
+			}
 			isMoving = true;
 			localPosition = localPosition.normalized;
 			MoveX (1);

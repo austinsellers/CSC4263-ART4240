@@ -55,7 +55,7 @@ Transform:
   m_GameObject: {fileID: 1145569153025672}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -9}
-  m_LocalScale: {x: 1.1999999, y: 1.1999999, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4723398794555000}
   m_RootOrder: 0
@@ -137,11 +137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expToGive: 2
-  distance: 2
-  speed: 2
+  distance: 1.5
+  speed: 3
   damage: 1
   type: Melee
-  health: 15
+  health: 6
+  attackRate: 1
 --- !u!212 &212066514390889570
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -137,14 +137,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expToGive: 10
-  distance: 6
-  speed: 4
+  distance: 4
+  speed: 2
   damage: 1
   type: Ranged
-  health: 10
+  health: 9
   warnTimeSeconds: 1
   projectile: {fileID: 1980761467944154, guid: c78e7f94f83ad4c92b689eecd514b173, type: 2}
-  projectileSpeed: 500
+  projectileSpeed: 350
 --- !u!212 &212372013472414810
 SpriteRenderer:
   m_ObjectHideFlags: 1

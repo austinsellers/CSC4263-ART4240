@@ -17,7 +17,7 @@ public class MeleeEnemy : EnemyMovement
 		base.distance = distance;
 		base.speed = speed;
 		player = GameObject.FindGameObjectWithTag ("Player");
-		playerController = (PlayerController)player.GetComponent (typeof(PlayerController));
+		playerController = player.GetComponent<PlayerController>();
 	}
 
 	// Update is called once per frame

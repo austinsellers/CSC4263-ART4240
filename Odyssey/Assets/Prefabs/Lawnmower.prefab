@@ -122,7 +122,7 @@ MonoBehaviour:
   distance: 2
   speed: 2
   damage: 1
-  health: 100
+  health: 30
 --- !u!212 &212802232026425534
 SpriteRenderer:
   m_ObjectHideFlags: 1

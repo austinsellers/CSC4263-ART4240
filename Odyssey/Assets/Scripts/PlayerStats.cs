@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour 
 {
+	[SerializeField]
 	private int currentLevel;
+	[SerializeField]
 	private int currentExp;
 	private int[] toLevelUp;
 	private float fillAmount;
@@ -19,6 +21,7 @@ public class PlayerStats : MonoBehaviour
 
 	void Awake() 
 	{
+		GameManager.instance.SetPlayerStats (this);
 		toLevelUp = new int[10] { 0, 20, 50, 100, 250, 500, 1000, 1750, 2500, 3500 };
 
 		maskObj = transform.FindChild ("Experience Bar").transform.FindChild ("Mask").gameObject;

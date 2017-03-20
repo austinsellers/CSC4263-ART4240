@@ -9940,7 +9940,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 10
-  playerExperience: 0
   pauseCanvas: {fileID: 1569582180}
 --- !u!1001 &1192245260
 Prefab:
@@ -16010,6 +16009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a9fd01fb5468c47a384b148969a0b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
+  currentExp: 0
   lerpSpeed: 2
 --- !u!1001 &1924131995
 Prefab:

@@ -97,37 +97,26 @@ public abstract class EnemyMovement : MonoBehaviour
 	}
 	void MoveY (int loc)
 	{
-		if (!lockY) 
-		{
+		if (!lockY) {
 
-			if (lockX) 
-			{
-				if (currentPos.y >= 2 && dir == 1) 
-				{
+			if (lockX) {
+				if (currentPos.y >= 2 && dir == 1) {
 					lockX = false;
-				} 
-				else if (currentPos.y <= -15 && dir == -1) 
-				{
+				} else if (currentPos.y <= -15 && dir == -1) {
 					lockX = false;
 				}
 				currentPos.Set (currentPos.x, currentPos.y + dir * speed * Time.deltaTime);
 				rigidBody.MovePosition (currentPos);
-			} 
-			else 
-			{
+			} else {
 				projectedPos.Set (currentPos.x, currentPos.y + localPosition.y * loc * speed * Time.deltaTime);
 				hit = Physics2D.Linecast (currentPos, projectedPos);
-				if (!type.Equals ("Ranged")) 
-				{
-					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) 
-					{
+				if (!type.Equals ("Ranged")) {
+					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) {
 						currentPos.Set (currentPos.x, projectedPos.y);
 						rigidBody.MovePosition (currentPos);
 					}  
-				}
-				else 
-				{
-					if (hit.transform == null || hit.transform.tag.Equals ("Wall")){
+				} else {
+					if (hit.transform == null || hit.transform.tag.Equals ("Wall")) {
 						currentPos.Set (currentPos.x, projectedPos.y);
 						rigidBody.MovePosition (currentPos);
 					} 
@@ -135,3 +124,4 @@ public abstract class EnemyMovement : MonoBehaviour
 			}
 		}
 	}
+}

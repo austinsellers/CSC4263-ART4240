@@ -18,12 +18,13 @@ public abstract class EnemyMovement : MonoBehaviour
 	BoxCollider2D boxCollider;
 	Rigidbody2D rigidBody;
 	RaycastHit2D hit;
+	SpriteRenderer renderer;
 
 	private int dir;
 	private bool isMoving;
 	public int expToGive;
 	private bool lockY = false,lockX = false;
-	SpriteRenderer renderer;
+
 
 	protected virtual void Start() 
 	{
@@ -43,17 +44,20 @@ public abstract class EnemyMovement : MonoBehaviour
 		localPosition = distanceAway ();
 		if (Mathf.Abs (localPosition.y) > distance || Mathf.Abs (localPosition.x) > distance) 
 		{
-			if (localPosition.x >= 0) {
+			if (localPosition.x >= 0) 
+			{
 				renderer.flipX = true;
 			}
-			if (localPosition.x < 0) {
+			if (localPosition.x < 0)
+			{
 				renderer.flipX = false;
 			}
 			isMoving = true;
 			localPosition = localPosition.normalized;
 			MoveX (1);
 			MoveY (1);
-			projectedPos.Set(currentPos.x,currentPos.y);} 
+			projectedPos.Set(currentPos.x,currentPos.y);
+		} 
 		else 
 		{
 			isMoving = false;
@@ -66,53 +70,64 @@ public abstract class EnemyMovement : MonoBehaviour
 	protected virtual Vector2 distanceAway()
 	{
 		return playerPos - currentPos;
-
 	}
 	void MoveX(int loc)
-	{
-		if (!lockX) {
+	{ 
+		if (!lockX)
+		{
 			projectedPos.Set (currentPos.x + localPosition.x * loc * speed * Time.deltaTime, currentPos.y);
 			hit = Physics2D.Linecast (currentPos, projectedPos);
-			if (hit.transform != null)
-				print (hit.transform.name);
-			if (!type.Equals ("Ranged")) {
-				if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) {
+			if (!type.Equals ("Ranged"))
+			{
+				if (hit.transform == null || hit.transform.name.Equals ("Thundercloud"))
+				{
 					currentPos.Set (projectedPos.x, currentPos.y);
 					rigidBody.MovePosition (currentPos);
 				} 
-			} else {
-				if (hit.transform == null || hit.transform.tag.Equals ("Wall")) {
+			} 
+			else 
+			{
+				if (hit.transform == null || hit.transform.tag.Equals ("Wall")) 
+				{
 					currentPos.Set (projectedPos.x, currentPos.y);
 					rigidBody.MovePosition (currentPos);
-					//} 
 				}
 			}
 		}
 	}
 	void MoveY (int loc)
 	{
-		if (!lockY) {
+		if (!lockY) 
+		{
 
-			if (lockX) {
-				if (currentPos.y >= 2 && dir == 1) {
+			if (lockX) 
+			{
+				if (currentPos.y >= 2 && dir == 1) 
+				{
 					lockX = false;
-				} else if (currentPos.y <= -15 && dir == -1) {
+				} 
+				else if (currentPos.y <= -15 && dir == -1) 
+				{
 					lockX = false;
 				}
 				currentPos.Set (currentPos.x, currentPos.y + dir * speed * Time.deltaTime);
 				rigidBody.MovePosition (currentPos);
-			} else {
+			} 
+			else 
+			{
 				projectedPos.Set (currentPos.x, currentPos.y + localPosition.y * loc * speed * Time.deltaTime);
 				hit = Physics2D.Linecast (currentPos, projectedPos);
-				if (!type.Equals ("Ranged")) {
-					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) {
+				if (!type.Equals ("Ranged")) 
+				{
+					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) 
+					{
 						currentPos.Set (currentPos.x, projectedPos.y);
 						rigidBody.MovePosition (currentPos);
 					}  
-				}else {
-					if (hit.transform != null)
-						print (hit.transform.name);
-						if (hit.transform == null || hit.transform.tag.Equals ("Wall"))
+				}
+				else 
+				{
+					if (hit.transform == null || hit.transform.tag.Equals ("Wall")){
 						currentPos.Set (currentPos.x, projectedPos.y);
 						rigidBody.MovePosition (currentPos);
 					} 

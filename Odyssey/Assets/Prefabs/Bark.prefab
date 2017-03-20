@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114119487292117520}
   - component: {fileID: 50925767296418192}
   - component: {fileID: 60894829425169796}
+  - component: {fileID: 95823167197409318}
   m_Layer: 8
   m_Name: Bark
   m_TagString: Untagged
@@ -37,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1366773005243472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.015549, y: -6.797348, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,6 +81,23 @@ PolygonCollider2D:
     - - {x: -0.43301272, y: -0.24999994}
       - {x: 0.43301272, y: -0.25000003}
       - {x: 0, y: 0.5}
+--- !u!95 &95823167197409318
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366773005243472}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a7d5b4345a1d2d142833129a5ff116a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114119487292117520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,7 +142,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 639304235
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d2de818c934f5654fbe9373ffa7c1e96, type: 3}
-  m_Color: {r: 0.8308824, g: 0.2260489, b: 0.2260489, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d6f7f8a10de00fe44a4a801a2a4eac87, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

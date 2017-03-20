@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
 	RaycastHit2D hit;
 
 	public Text healthText;
-	private int health;
+	[HideInInspector]
+	public int health;
 
 	SpriteRenderer renderer;
 	Animator animator;

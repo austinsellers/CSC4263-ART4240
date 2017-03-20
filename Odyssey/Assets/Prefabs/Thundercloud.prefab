@@ -53,7 +53,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1519126482263760}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.91, y: 6.73, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
@@ -140,7 +140,8 @@ MonoBehaviour:
   distance: 6
   speed: 4
   damage: 1
-  health: 20
+  health: 10
+  warnTimeSeconds: 1
   projectile: {fileID: 1980761467944154, guid: c78e7f94f83ad4c92b689eecd514b173, type: 2}
   projectileSpeed: 500
 --- !u!212 &212372013472414810

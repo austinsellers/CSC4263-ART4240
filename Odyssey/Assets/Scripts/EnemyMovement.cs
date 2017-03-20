@@ -23,7 +23,7 @@ public abstract class EnemyMovement : MonoBehaviour
 	private bool isMoving;
 	public int expToGive;
 	private bool lockY = false,lockX = false;
-
+	SpriteRenderer renderer;
 
 	protected virtual void Start() 
 	{
@@ -31,7 +31,7 @@ public abstract class EnemyMovement : MonoBehaviour
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		boxCollider = gameObject.GetComponent<BoxCollider2D> ();
 		animator = gameObject.GetComponent<Animator> ();
-
+		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		playerStats = FindObjectOfType<PlayerStats> ();
 	}
 		
@@ -44,10 +44,10 @@ public abstract class EnemyMovement : MonoBehaviour
 		if (Mathf.Abs (localPosition.y) > distance || Mathf.Abs (localPosition.x) > distance) 
 		{
 			if (localPosition.x >= 0) {
-				transform.localRotation = Quaternion.Euler (0, 180, 0);
+				renderer.flipX = true;
 			}
 			if (localPosition.x < 0) {
-				transform.localRotation = Quaternion.Euler (0, 0, 0);
+				renderer.flipX = false;
 			}
 			isMoving = true;
 			localPosition = localPosition.normalized;

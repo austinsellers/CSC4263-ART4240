@@ -9,7 +9,7 @@ public class MeleeEnemy : EnemyMovement
 	public int damage = 1;
 	public string type = "Melee";
     public int health;
-	float attackRate = 3f;
+	public float attackRate = 3f;
 	float nextAttack;
 	GameObject player;
 	PlayerController playerController;

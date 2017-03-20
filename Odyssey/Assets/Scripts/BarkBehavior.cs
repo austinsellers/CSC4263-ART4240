@@ -28,7 +28,11 @@ public class BarkBehavior : MonoBehaviour
             if (other.gameObject.GetComponent<RangedEnemy>() != null)
                 other.gameObject.GetComponent<RangedEnemy>().takeDamage(damage);
             Destroy(gameObject);
-        } 
+        }
+        if (other.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

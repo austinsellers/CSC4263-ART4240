@@ -29,5 +29,6 @@ public class BiteBehavior : MonoBehaviour {
             if(other.gameObject.GetComponent<RangedEnemy>() != null)
                 other.gameObject.GetComponent<RangedEnemy>().takeDamage(damage);
         }
+        
     }
 }

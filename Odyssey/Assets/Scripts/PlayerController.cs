@@ -217,11 +217,13 @@ public class PlayerController : MonoBehaviour
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2 (barkSpd * Mathf.Sin(dir * Mathf.PI / 2f), barkSpd * Mathf.Cos(dir * Mathf.PI / 2f)));
+            gameObject.GetComponent<AudioSource>().Play();
         }
         else
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), currentPos.y + 2 * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2(barkSpd * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), barkSpd * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4)));
+            gameObject.GetComponent<AudioSource>().Play();
         }
         
     }

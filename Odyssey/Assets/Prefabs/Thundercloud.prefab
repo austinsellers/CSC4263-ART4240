@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 212372013472414810}
   - component: {fileID: 50274067606868732}
   - component: {fileID: 61945239813253958}
-  - component: {fileID: 114229978900826226}
+  - component: {fileID: 114347073688822456}
+  - component: {fileID: 95026166584141592}
   m_Layer: 8
   m_Name: Thundercloud
   m_TagString: Enemy
@@ -107,7 +108,24 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.56, y: 2.56}
---- !u!114 &114229978900826226
+--- !u!95 &95026166584141592
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519126482263760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87a8d4cb451a7c24488db9ec9f76db23, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114347073688822456
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,14 +133,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1519126482263760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f6687514b741d948b375ae7f2a90ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expToGive: 10
-  distance: 4.5
-  speed: 2
+  expToGive: 1
+  distance: 6
+  speed: 4
   damage: 1
-  health: 1
+  health: 20
+  projectile: {fileID: 1980761467944154, guid: c78e7f94f83ad4c92b689eecd514b173, type: 2}
+  projectileSpeed: 500
 --- !u!212 &212372013472414810
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -153,8 +173,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348462293
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 078529d96984f044b8083caf7d9f122b, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 23b72adb6d816fa469af1ccfdd564d4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

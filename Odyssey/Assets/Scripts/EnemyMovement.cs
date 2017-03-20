@@ -12,6 +12,8 @@ public abstract class EnemyMovement : MonoBehaviour
 	Vector2 projectedPos;
 	BoxCollider2D boxCollider;
 	Rigidbody2D rigidBody;
+	protected Animator animator;
+
 	protected float speed;
 	RaycastHit2D hit;
 	Bounds NearWall;
@@ -25,6 +27,7 @@ public abstract class EnemyMovement : MonoBehaviour
 		currentPos = transform.position;
 		rigidBody = gameObject.GetComponent<Rigidbody2D> ();
 		boxCollider = gameObject.GetComponent<BoxCollider2D> ();
+		animator = gameObject.GetComponent<Animator> ();
 
 		playerStats = FindObjectOfType<PlayerStats> ();
 	}

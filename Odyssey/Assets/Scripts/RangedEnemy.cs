@@ -8,6 +8,7 @@ public class RangedEnemy : EnemyMovement
 	public float speed = 2f;
 	public int damage = 1;
 	public int health;
+	public float warnTimeSeconds = 1f;
 	float attackRate = 2f;
 	float nextAttack;
 	GameObject player;
@@ -20,7 +21,7 @@ public class RangedEnemy : EnemyMovement
 		base.distance = distance;
 		base.speed = speed;
 		player = GameObject.FindGameObjectWithTag ("Player");
-		playerController = (PlayerController)player.GetComponent (typeof(PlayerController));
+		playerController = player.GetComponent<PlayerController>();
 	}
 
 	void Update () 
@@ -38,13 +39,16 @@ public class RangedEnemy : EnemyMovement
 	void attack()
 	{
 		if(Time.time > nextAttack){
-			shoot ();
+			StartCoroutine(shoot ());
 			nextAttack = Time.time + attackRate;
 		}
 	}
 	 
-	void shoot()
+	IEnumerator shoot()
 	{
+		animator.SetBool ("enemyShoot", true);
+		yield return new WaitForSecondsRealtime(warnTimeSeconds);
+		animator.SetBool ("enemyShoot", false);
 		GameObject clone = (GameObject)Instantiate (projectile, transform.position, transform.rotation);
 		clone.transform.right = ((playerController.getPosition () - currentPos).normalized);
 		clone.GetComponent<Rigidbody2D> (). AddForce ((playerController.getPosition()-currentPos).normalized * projectileSpeed);

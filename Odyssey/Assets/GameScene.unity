@@ -3301,11 +3301,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17321ee9eb60f804385721e1a0ba76c8, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &268121186 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1519126482263760, guid: 17321ee9eb60f804385721e1a0ba76c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 268121185}
 --- !u!1001 &270471573
 Prefab:
   m_ObjectHideFlags: 0
@@ -4803,11 +4798,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4087112467849794, guid: ece83603515abb94ba751ef1d7e2089d,
     type: 2}
   m_PrefabInternal: {fileID: 1477316877}
---- !u!1 &432025150 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1484707358913086, guid: c82f37e18dce7844b86c0fd26c092f44,
-    type: 2}
-  m_PrefabInternal: {fileID: 1413387569}
 --- !u!1001 &433227610
 Prefab:
   m_ObjectHideFlags: 0
@@ -5678,7 +5668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7594eb62755a4fc40ac2e17c3ef8ca3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 432025150}
+  enemy: {fileID: 1484707358913086, guid: c82f37e18dce7844b86c0fd26c092f44, type: 2}
   spawnTime: 10
   spawnPoints:
   - {fileID: 976692357}
@@ -5693,7 +5683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7594eb62755a4fc40ac2e17c3ef8ca3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 268121186}
+  enemy: {fileID: 1519126482263760, guid: 17321ee9eb60f804385721e1a0ba76c8, type: 2}
   spawnTime: 10
   spawnPoints:
   - {fileID: 170618198}

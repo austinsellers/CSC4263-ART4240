@@ -79,7 +79,7 @@ public abstract class EnemyMovement : MonoBehaviour
 			hit = Physics2D.Linecast (currentPos, projectedPos);
 			if (!type.Equals ("Ranged"))
 			{
-				if (hit.transform == null || hit.transform.name.Equals ("Thundercloud"))
+				if (hit.transform == null || hit.transform.name.Equals ("Thundercloud") || hit.transform.name.Equals("Thundercloud(Clone)"))
 				{
 					currentPos.Set (projectedPos.x, currentPos.y);
 					rigidBody.MovePosition (currentPos);
@@ -111,11 +111,14 @@ public abstract class EnemyMovement : MonoBehaviour
 				projectedPos.Set (currentPos.x, currentPos.y + localPosition.y * loc * speed * Time.deltaTime);
 				hit = Physics2D.Linecast (currentPos, projectedPos);
 				if (!type.Equals ("Ranged")) {
-					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud")) {
+					if (hit.transform == null || hit.transform.name.Equals ("Thundercloud") || hit.transform.name.Equals("Thundercloud(Clone)"))
+					{
 						currentPos.Set (currentPos.x, projectedPos.y);
 						rigidBody.MovePosition (currentPos);
 					}  
-				} else {
+				} 
+				else 
+				{
 					if (hit.transform == null || hit.transform.tag.Equals ("Wall")) {
 						currentPos.Set (currentPos.x, projectedPos.y);
 						rigidBody.MovePosition (currentPos);

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Bark;
 
 	public float speed = 6f;
-    public float barkSpd =1f;
+    public float barkSpd = 1f;
     bool ableToBark = true;
     bool ableToBite = true;
     float lastBark;
@@ -24,10 +24,6 @@ public class PlayerController : MonoBehaviour
 	Vector2 currentPos,projectedPos;
 	BoxCollider2D boxCollider;
 	RaycastHit2D hit;
-
-	public Text healthText;
-	[HideInInspector]
-	public int health;
 
 	SpriteRenderer renderer;
 	Animator animator;
@@ -54,15 +50,12 @@ public class PlayerController : MonoBehaviour
 		currentPos = playerTransform.position;
 		projectedPos = currentPos;
 		normalColor = renderer.color;
-
-		health = GameManager.instance.playerHealth;
-		healthText.text = "x " + health; 
 	}
 
 	void Update () 
 	{
-        // Can't move and animations won't play if paused
-        if (!GameManager.isPaused())
+        // Can't move and animations won't play if paused or upgrading
+		if (!GameManager.isPaused() && !GameManager.isUpgrade())
         {
             // Doesn't move until button is pressed
             playerMove = false;
@@ -243,9 +236,7 @@ public class PlayerController : MonoBehaviour
 
 		StartCoroutine (ChangeColor());
 
-		health -= amt;
-		healthText.text = "x " + health;
-		IsGameOver ();
+		GameManager.instance.playerStats.HurtPlayer (amt);
 	}
 
 	IEnumerator ChangeColor() 
@@ -253,14 +244,6 @@ public class PlayerController : MonoBehaviour
 		renderer.color = new Color (237/255.0f, 95/255.0f, 85/255.0f);
 		yield return new WaitForSecondsRealtime(0.2f);
 		renderer.color = normalColor;
-	}
-
-	private void IsGameOver()
-	{
-		if (health <= 0) 
-		{
-			GameManager.instance.GameOver ();
-		}
 	}
 
 	public Vector2 getPosition ()

@@ -12,6 +12,15 @@ public class PlayerStats : MonoBehaviour
 	private int[] toLevelUp;
 	private float fillAmount;
 
+	public Text healthText;
+	[HideInInspector]
+	public int health = 10;
+
+	[HideInInspector]
+	public int barkDamage = 1;
+	[HideInInspector]
+	public int biteDamage = 3;
+
 	private Image content;
 	private Text expText;
 
@@ -27,6 +36,8 @@ public class PlayerStats : MonoBehaviour
 		maskObj = transform.FindChild ("Experience Bar").transform.FindChild ("Mask").gameObject;
 		content = maskObj.transform.FindChild("Content").GetComponent<Image>();
 		expText = maskObj.GetComponentInChildren<Text>();
+
+		healthText.text = "x " + health; 
 	}
 
 	void Update () 
@@ -44,6 +55,27 @@ public class PlayerStats : MonoBehaviour
 		}
 	}
 
+	public void HurtPlayer(int amt)
+	{
+		health -= amt;
+		healthText.text = "x " + health;
+		IsGameOver ();
+	}
+
+	public void AddHealth(int amt)
+	{
+		health += amt;
+		healthText.text = "x " + health;
+	}
+
+	private void IsGameOver()
+	{
+		if (health <= 0) 
+		{
+			GameManager.instance.GameOver ();
+		}
+	}
+
 	public void AddExperience(int experienceToAdd)
 	{
 		currentExp += experienceToAdd;
@@ -54,6 +86,8 @@ public class PlayerStats : MonoBehaviour
 		currentLevel++;
 		expText.text = "Level: " + currentLevel;
 		// TODO: allow the player to pick which stat to upgrade
+		if (currentLevel != 1)
+			GameManager.instance.Upgrade ();
 	}
 
 	// Experience Bar Methods

@@ -9,7 +9,8 @@ public class BiteBehavior : MonoBehaviour {
     bool didDamage = false;
 
 	void Start ()
-    {
+	{
+		damage = GameManager.instance.playerStats.biteDamage;
         startTime = Time.time;
 	}
 	

@@ -10,6 +10,7 @@ public class BarkBehavior : MonoBehaviour
 
     void Start()
     {
+		damage = GameManager.instance.playerStats.barkDamage;
         startTime = Time.time;
     }
 

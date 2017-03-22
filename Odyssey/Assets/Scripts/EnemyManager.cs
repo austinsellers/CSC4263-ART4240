@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour 
 {
-	private PlayerController player;
+	private PlayerStats stats;
 	public GameObject enemy;
 	public float spawnTime = 5f;
 	public Transform[] spawnPoints;
 
 	void Start () 
 	{
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		stats = GameObject.Find("Main Canvas").GetComponent<PlayerStats>();
 		InvokeRepeating ("Spawn", spawnTime, spawnTime);
 	}
 
 	void Spawn()
 	{
-		if (player.health <= 0) 
+		if (stats.health <= 0) 
 		{
 			return;
 		}

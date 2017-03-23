@@ -1,0 +1,8 @@
+Waves
+Final Boss 
+Diagonal animations
+Mailmen animation & scripts
+Lawnmower animation & scripts
+enemy movement refinement
+level layout
+damage tuning (bite is really strong)

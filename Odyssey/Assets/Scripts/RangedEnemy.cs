@@ -52,7 +52,7 @@ public class RangedEnemy : EnemyMovement
 		yield return new WaitForSecondsRealtime(warnTimeSeconds);
 		animator.SetBool ("enemyShoot", false);
 		GameObject clone = (GameObject)Instantiate (projectile, transform.position, transform.rotation);
-		clone.transform.right = ((playerController.getPosition () - currentPos).normalized);
+		clone.transform.rotation = Quaternion.LookRotation(Vector3.forward, (player.transform.position - this.transform.position).normalized);
 		clone.GetComponent<Rigidbody2D> (). AddForce ((playerController.getPosition()-currentPos).normalized * projectileSpeed);
 	}
 

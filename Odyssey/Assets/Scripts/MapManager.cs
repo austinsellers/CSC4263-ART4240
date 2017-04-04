@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
 
 	private Transform mapParent;
 
+	// Map is indexed map[y,x]
 	int[,] map = new int[,] { {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
 					 		  {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
 					 		  {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
@@ -74,6 +75,9 @@ public class MapManager : MonoBehaviour
 				// Rotate fence tiles on left and right sides (until we get side fences)
 				if ((x == 0 || x == map.GetLength (0) - 1) && (y != 0 && y != map.GetLength(1) - 1))
 					tileInstance.transform.Rotate(new Vector3(0f, 0f, 90f));
+
+				if (y == 0)
+					tileInstance.gameObject.GetComponent<SpriteRenderer> ().sortingLayerName = "Walls";
 
 				// If fence or bush add grass tile under it
 				if (tile == 1 || tile == 2) 

@@ -57,6 +57,9 @@ TagManager:
   - name: Entities
     uniqueID: 3946505003
     locked: 0
+  - name: Walls
+    uniqueID: 1481723257
+    locked: 0
   - name: Attack
     uniqueID: 639304235
     locked: 0

@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 	public float barkDelay = .5f;
 	public float biteDelay = .5f;
 	float movement;
-    float distanceFromAtk = 1.5f;
+    public float distanceFromAtk = 1.5f;
 
 	Color normalColor;
 	Rigidbody2D rigidBody;

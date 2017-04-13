@@ -16,6 +16,7 @@ public class BarkBehavior : MonoBehaviour
 
     void Update()
     {
+        
         if ((Time.time - startTime) > timeExisting)
             DestroyImmediate(gameObject);
     }
@@ -25,9 +26,14 @@ public class BarkBehavior : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             if (other.gameObject.GetComponent<MeleeEnemy>() != null)
+            {
                 other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
+            }
             if (other.gameObject.GetComponent<RangedEnemy>() != null)
+            {
                 other.gameObject.GetComponent<RangedEnemy>().takeDamage(damage);
+
+            }
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

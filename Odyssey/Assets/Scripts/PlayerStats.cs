@@ -16,6 +16,9 @@ public class PlayerStats : MonoBehaviour
 	[HideInInspector]
 	public int health = 10;
 
+    [HideInInspector]
+    public int defense = 0;
+
 	[HideInInspector]
 	public int barkDamage = 1;
 	[HideInInspector]
@@ -57,7 +60,7 @@ public class PlayerStats : MonoBehaviour
 
 	public void HurtPlayer(int amt)
 	{
-		health -= amt;
+		health -= (amt - defense);
 		healthText.text = "x " + health;
 		IsGameOver ();
 	}

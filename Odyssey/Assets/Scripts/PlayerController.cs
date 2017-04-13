@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 	public float biteDelay = .5f;
 	float movement;
     public float distanceFromAtk = 1.5f;
+    public Vector2 biteScale = new Vector2(1f,1f);
+    public float barkScale = .2f;
 
 	Color normalColor;
 	Rigidbody2D rigidBody;
@@ -192,13 +194,15 @@ public class PlayerController : MonoBehaviour
         if (dir < 4)
         {
             bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + distanceFromAtk * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, 0f ,0f));
-			bite.transform.parent = gameObject.transform;
+            bite.GetComponent<Transform>().localScale = new Vector3(biteScale.x, biteScale.y, 0f);
+            bite.transform.parent = gameObject.transform;
             bite.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * -90f));
         }
         else
         {
             bite = (GameObject)Instantiate(Bite, new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4)), currentPos.y + distanceFromAtk * Mathf.Cos(((dir - 4) * (Mathf.PI / 2f)) + (Mathf.PI / 4f)), -5f), new Quaternion(0f, 0f, 0f, 0f));
-			bite.transform.parent = gameObject.transform;
+            bite.GetComponent<Transform>().localScale = new Vector3(biteScale.x, biteScale.y, 0f);
+            bite.transform.parent = gameObject.transform;
             bite.GetComponent<Transform>().Rotate(new Vector3(0f,0f,(dir-4)*-90f - 45f ));
 		}
     }
@@ -210,7 +214,8 @@ public class PlayerController : MonoBehaviour
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2 (barkSpd * Mathf.Sin(dir * Mathf.PI / 2f), barkSpd * Mathf.Cos(dir * Mathf.PI / 2f)));
-            if(dir != 2)
+            bark.GetComponent<Transform>().localScale = new Vector3(.2f, barkScale, 1f);
+            if (dir != 2)
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * 90f));
             else
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, 0f));

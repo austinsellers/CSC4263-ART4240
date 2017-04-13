@@ -66,22 +66,23 @@ public class GameManager : MonoBehaviour
 
     private string[] txts = {   "Increased Bark Damage",
                                 "Increased Bite Damage",
-                                "Increaed Movement Speed",
+                                "Increased Movement Speed",
                                 "Decreased Bark Cooldown",
                                 "Decreased Bite Cooldown",
                                 "Increased Defense",
-                                "7",
-                                "8",
-                                "9",
-                                "10",
-                                "11",
-                                "12" };
+                                "Increased Bite Range",
+                                "Chance of Healing on Kill",
+                                "Increased Bark Speed",
+                                "Increased Bite Size",
+                                "Increased Bark Size",
+                                "Increased Experience Gain" };
 
     private Text gameOverText;
 
 	[HideInInspector]
 	public PlayerStats playerStats;
-	private MapManager mapManager;
+    private MapManager mapManager;
+    private PlayerController player;
 
 	public static GameManager instance = null;
 
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
 		// Doesn't destroy when reloading scene
 		DontDestroyOnLoad (gameObject);
 		mapManager = GetComponent<MapManager> ();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
 		SetupGame ();
 	}
 
@@ -138,8 +140,6 @@ public class GameManager : MonoBehaviour
 		{
 			if (Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Keypad1)) 
 			{
-				playerStats.AddHealth (5);
- 
                 textList.AddUpgrade(upgrade2Int);
                 textList.AddUpgrade(upgrade3Int);
 
@@ -152,8 +152,6 @@ public class GameManager : MonoBehaviour
 			} 
 			else if (Input.GetKeyDown (KeyCode.Alpha2) || Input.GetKeyDown (KeyCode.Keypad2))
             {
-				playerStats.barkDamage += 2;
-
                 textList.AddUpgrade(upgrade1Int);
                 textList.AddUpgrade(upgrade3Int);
 
@@ -166,8 +164,6 @@ public class GameManager : MonoBehaviour
 			} 
 			else if (Input.GetKeyDown (KeyCode.Alpha3) || Input.GetKeyDown (KeyCode.Keypad3)) 
 			{
-				playerStats.biteDamage += 3;
-
                 textList.AddUpgrade(upgrade1Int);
                 textList.AddUpgrade(upgrade2Int);
 
@@ -218,9 +214,9 @@ public class GameManager : MonoBehaviour
         upgrade2.transform.SetParent(upgradeCanvas.transform);
         upgrade3.transform.SetParent(upgradeCanvas.transform);
 
-        upgrade1.GetComponent<RectTransform>().Translate(-179.7f, 0, 0);
+        upgrade1.GetComponent<RectTransform>().Translate(-279.7f, 0, 0);
         upgrade2.GetComponent<RectTransform>().Translate(0, 0, 0);
-        upgrade3.GetComponent<RectTransform>().Translate(179.7f, 0, 0);
+        upgrade3.GetComponent<RectTransform>().Translate(279.7f, 0, 0);
 
         upgrade1c0 = upgrade1.transform.GetChild(0).gameObject;
         upgrade2c0 = upgrade2.transform.GetChild(0).gameObject;
@@ -291,40 +287,41 @@ public class GameManager : MonoBehaviour
         switch (upNumber)
         {
             case 1:
-
+                playerStats.barkDamage += 2;
                 break;
             case 2:
-
+                playerStats.biteDamage += 2;
                 break;
             case 3:
-
+                player.speed += 2;
                 break;
             case 4:
-
+                player.barkDelay -= .25f;
                 break;
             case 5:
-
+                player.biteDelay -= .25f;
                 break;
             case 6:
-
+                playerStats.defense += 1;
                 break;
             case 7:
-
+                player.distanceFromAtk += 2;
                 break;
             case 8:
-
+                playerStats.upgrade8 = true;
                 break;
             case 9:
-
+                player.barkSpd = 4f;
                 break;
             case 10:
-
+                player.biteScale = new Vector2(1.5f, 1.5f);
+                player.distanceFromAtk += 1f;
                 break;
             case 11:
-
+                player.barkScale += .2f;
                 break;
             case 12:
-
+                playerStats.expModifier += .2f;
                 break;
         }
     }

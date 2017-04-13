@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
 	[SerializeField]
 	private int currentLevel;
 	[SerializeField]
-	private int currentExp;
+	private float currentExp;
 	private int[] toLevelUp;
 	private float fillAmount;
 
@@ -19,10 +19,15 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector]
     public int defense = 0;
 
+    [HideInInspector]
+    public bool upgrade8 = false;
+
 	[HideInInspector]
 	public int barkDamage = 1;
 	[HideInInspector]
 	public int biteDamage = 3;
+    [HideInInspector]
+    public float expModifier = 1;
 
 	private Image content;
 	private Text expText;
@@ -81,7 +86,15 @@ public class PlayerStats : MonoBehaviour
 
 	public void AddExperience(int experienceToAdd)
 	{
-		currentExp += experienceToAdd;
+		currentExp += experienceToAdd * expModifier;
+        if(upgrade8)
+        {
+            int random8 = Random.Range(0, 7);
+            if(random8 == 7)
+            {
+                health += 2;
+            }
+        }
 	}
 
 	public void LevelUp()
@@ -115,6 +128,6 @@ public class PlayerStats : MonoBehaviour
 
 	public int getCurrentExp()
 	{
-		return currentExp;
+		return (int)currentExp;
 	}
 }

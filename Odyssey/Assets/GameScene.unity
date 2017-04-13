@@ -19664,8 +19664,10 @@ MonoBehaviour:
   healthText: {fileID: 550700262}
   health: 10
   defense: 0
+  upgrade8: 0
   barkDamage: 1
   biteDamage: 3
+  expModifier: 1
   lerpSpeed: 2
 --- !u!1001 &1924131995
 Prefab:
@@ -20127,6 +20129,16 @@ Prefab:
         type: 2}
       propertyPath: m_UseFullKinematicContacts
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020114520761748, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: biteScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020114520761748, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: biteScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}

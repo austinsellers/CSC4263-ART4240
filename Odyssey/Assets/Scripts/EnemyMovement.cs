@@ -24,7 +24,9 @@ public abstract class EnemyMovement : MonoBehaviour
 	private bool isMoving;
 	public int expToGive;
 	private bool lockY = false,lockX = false;
-
+	public EnemyManager enemyManager;
+	public EnemyManager[] enemyManagers;
+	public string enemyName;
 
 	protected virtual void Start() 
 	{
@@ -34,6 +36,14 @@ public abstract class EnemyMovement : MonoBehaviour
 		animator = gameObject.GetComponent<Animator> ();
 		renderer = gameObject.GetComponent<SpriteRenderer> ();
 		playerStats = FindObjectOfType<PlayerStats> ();
+			enemyManagers = GameObject.FindObjectsOfType<EnemyManager> ();
+
+		for (int i = 0; i < enemyManagers.Length; i++) 
+		{
+			if (enemyManagers [i].enemyName.Equals(this.enemyName)) {
+				enemyManager=enemyManagers[i];
+			}
+		}
 	}
 		
 

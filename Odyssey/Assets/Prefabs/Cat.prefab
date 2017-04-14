@@ -137,6 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expToGive: 2
+  enemyManager: {fileID: 0}
+  enemyManagers: []
+  enemyName: Cat
   distance: 1.5
   speed: 3
   damage: 1

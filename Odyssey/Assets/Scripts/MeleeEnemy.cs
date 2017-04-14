@@ -46,6 +46,7 @@ public class MeleeEnemy : EnemyMovement
         if(health<1)
         {
             Destroy(gameObject);
+			enemyManager.enemyKilled ();
 			playerStats.AddExperience (expToGive);
         }
     }

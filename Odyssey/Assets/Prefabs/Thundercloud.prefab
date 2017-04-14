@@ -137,6 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expToGive: 10
+  enemyManager: {fileID: 0}
+  enemyManagers: []
+  enemyName: Thundercloud
   distance: 4
   speed: 2
   damage: 1

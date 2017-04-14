@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 	private static bool paused = false;
 	private static bool gameOver = false;
 	private static bool upgrade = false;
+	public int wave;
 	public GameObject pauseCanvas;
 	public GameObject gameOverCanvas;
 	public GameObject upgradeCanvas;
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
 
 	[HideInInspector]
 	public PlayerStats playerStats;
+	public EnemyManager[] enemyManagers;
     private MapManager mapManager;
     private PlayerController player;
 
@@ -98,6 +100,7 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad (gameObject);
 		mapManager = GetComponent<MapManager> ();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+		enemyManagers = GameObject.FindObjectsOfType<EnemyManager> ();
 		SetupGame ();
 	}
 
@@ -119,8 +122,58 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad (gameOverCanvas);
 	}
 
+	bool readyForBoss(EnemyManager[] e)
+	{
+		for (int i = 0; i < e.Length; i++) 
+		{
+			if (e [i].spawnAmount.Length > wave) 
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool readyForNextLevel(EnemyManager[] e)
+	{
+		bool isReady = true;
+		for (int i = 0; i < e.Length; i++) 
+		{
+			if (e [i].enemiesAlive.Length > wave) 
+			{
+				if (e [i].enemiesAlive [wave] > 0)
+					isReady = false;
+			}
+		}
+		if (isReady) {
+			for (int i = 0; i < e.Length; i++) 
+			{
+				if (e [i].spawnAmount.Length > wave) 
+				{
+					e [i].pauseSpawn = false;
+				}
+			}
+		}
+		return isReady;
+	}
+
+	IEnumerator WaitFor(float delay)
+	{
+		yield return new WaitForSecondsRealtime (delay);
+	}
+
 	void Update()
 	{
+		
+		if (readyForNextLevel (enemyManagers)) {
+			if (readyForBoss (enemyManagers)) {
+				Debug.Log ("Ready for bo$$ level");
+				GameOver ();
+			}
+			StartCoroutine(WaitFor(5f));
+			wave++;
+			Debug.Log ("New Wave:" + wave);
+		}
 		if (paused) 
 		{
 			if (Input.GetKeyDown (KeyCode.Q))

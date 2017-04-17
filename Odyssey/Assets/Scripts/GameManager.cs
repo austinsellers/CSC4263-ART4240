@@ -339,41 +339,41 @@ public class GameManager : MonoBehaviour
     {
         switch (upNumber)
         {
-            case 1:
+            case 0:
                 playerStats.barkDamage += 2;
                 break;
-            case 2:
+            case 1:
                 playerStats.biteDamage += 2;
                 break;
-            case 3:
+            case 2:
                 player.speed += 2;
                 break;
-            case 4:
+            case 3:
                 player.barkDelay -= .25f;
                 break;
-            case 5:
+            case 4:
                 player.biteDelay -= .25f;
                 break;
-            case 6:
+            case 5:
                 playerStats.defense += 1;
                 break;
-            case 7:
+            case 6:
                 player.distanceFromAtk += 2;
                 break;
-            case 8:
+            case 7:
                 playerStats.upgrade8 = true;
                 break;
-            case 9:
-                player.barkSpd = 4f;
+            case 8:
+                player.barkSpd = 1000f;
                 break;
-            case 10:
+            case 9:
                 player.biteScale = new Vector2(1.5f, 1.5f);
                 player.distanceFromAtk += 1f;
                 break;
-            case 11:
+            case 10:
                 player.barkScale += .2f;
                 break;
-            case 12:
+            case 11:
                 playerStats.expModifier += .2f;
                 break;
         }

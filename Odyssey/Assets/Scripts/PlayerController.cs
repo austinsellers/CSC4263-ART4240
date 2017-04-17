@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Bark;
 
 	public float speed = 6f;
-    public float barkSpd = 1f;
+    public float barkSpd = 700f;
     bool ableToBark = true;
     bool ableToBite = true;
     float lastBark;
@@ -65,29 +65,29 @@ public class PlayerController : MonoBehaviour
             if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
             {
                 direction = 7;
-                Move(0); // Move UP
-                Move(3); // Move LEFT
+                Move(0,true); // Move UP
+                Move(3,true); // Move LEFT
                 Rotate(30f);
             }
             else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
             {
                 direction = 4;
-                Move(0); // Move UP
-                Move(1); // Move RIGHT
+                Move(0,true); // Move UP
+                Move(1,true); // Move RIGHT
                 Rotate(-30f);
             }
             else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
             {
                 direction = 5;
-                Move(2); // Move DOWN
-                Move(1); // Move RIGHT
+                Move(2,true); // Move DOWN
+                Move(1,true); // Move RIGHT
                 Rotate(30f);
             }
             else if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
             {
                 direction = 6;
-                Move(2); // Move DOWN
-                Move(3); // Move LEFT
+                Move(2,true); // Move DOWN
+                Move(3,true); // Move LEFT
                 Rotate(-30f);
             }
             else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
                     renderer.flipX = false;
                 // If the player is facing Left
                 direction = 3;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             {
                 // If the player is facing Up
                 direction = 0;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 // If the player is facing Down
                 direction = 2;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
                     renderer.flipX = true;
                 // If the player is facing Right
                 direction = 1;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -166,27 +166,53 @@ public class PlayerController : MonoBehaviour
 		playerTransform.rotation = Quaternion.Euler(rotat);
 	}
 
-	void Move(int dir)
+	void Move(int dir,bool diag)
 	{
-		playerMove = true;
-		movement = speed * Time.deltaTime;
+        if (diag == false)
+        {
+            playerMove = true;
+            movement = speed * Time.deltaTime;
 
-		if (dir == 3)
-			projectedPos += Vector2.left * movement;
-		if (dir == 1)
-			projectedPos += Vector2.right * movement;
-		if (dir == 0)
-			projectedPos += Vector2.up * movement;
-		if (dir == 2)
-			projectedPos += Vector2.down * movement;
-		
-		hit = Physics2D.Linecast (currentPos, projectedPos);
-		if (hit.transform == null) {
-			currentPos.Set (projectedPos.x, projectedPos.y);
-			rigidBody.MovePosition (currentPos);
-		} 
-		projectedPos.Set(currentPos.x,currentPos.y);
-	}
+            if (dir == 3)
+                projectedPos += Vector2.left * movement;
+            if (dir == 1)
+                projectedPos += Vector2.right * movement;
+            if (dir == 0)
+                projectedPos += Vector2.up * movement;
+            if (dir == 2)
+                projectedPos += Vector2.down * movement;
+
+            hit = Physics2D.Linecast(currentPos, projectedPos);
+            if (hit.transform == null)
+            {
+                currentPos.Set(projectedPos.x, projectedPos.y);
+                rigidBody.MovePosition(currentPos);
+            }
+            projectedPos.Set(currentPos.x, currentPos.y);
+        }
+        else
+        {
+            playerMove = true;
+            movement = speed * Time.deltaTime;
+
+            if (dir == 3)
+                projectedPos += (Vector2.left * movement)*(Mathf.Sqrt(2)/2f);
+            if (dir == 1)
+                projectedPos += (Vector2.right * movement)* (Mathf.Sqrt(2)/2f);
+            if (dir == 0)
+                projectedPos += (Vector2.up * movement) * (Mathf.Sqrt(2)/2f);
+            if (dir == 2)
+                projectedPos += (Vector2.down * movement) * (Mathf.Sqrt(2)/2f);
+
+            hit = Physics2D.Linecast(currentPos, projectedPos);
+            if (hit.transform == null)
+            {
+                currentPos.Set(projectedPos.x, projectedPos.y);
+                rigidBody.MovePosition(currentPos);
+            }
+            projectedPos.Set(currentPos.x, currentPos.y);
+        }
+    }
 
 	void BiteMake(int dir)
 	{
@@ -214,7 +240,7 @@ public class PlayerController : MonoBehaviour
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2 (barkSpd * Mathf.Sin(dir * Mathf.PI / 2f), barkSpd * Mathf.Cos(dir * Mathf.PI / 2f)));
-            bark.GetComponent<Transform>().localScale = new Vector3(.2f, barkScale, 1f);
+            bark.GetComponent<Transform>().localScale = new Vector3(barkScale, .2f, 1f);
             if (dir != 2)
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * 90f));
             else
@@ -225,7 +251,8 @@ public class PlayerController : MonoBehaviour
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), currentPos.y + 2 * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2(barkSpd * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), barkSpd * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4)));
-            if(dir == 4 || dir == 6)
+            bark.GetComponent<Transform>().localScale = new Vector3(barkScale, .2f, 1f);
+            if (dir == 4 || dir == 6)
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, (dir - 5) * 90f + 225f));
             else
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, (dir - 5) * 90f + 45f));

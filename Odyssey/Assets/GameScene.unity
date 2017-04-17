@@ -20066,6 +20066,11 @@ Prefab:
       propertyPath: biteScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114020114520761748, guid: 5f34cc92225301f4189c08a6341d183e,
+        type: 2}
+      propertyPath: barkSpd
+      value: 700
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}
   m_IsPrefabParent: 0

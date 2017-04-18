@@ -98,5 +98,6 @@ public class MapManager : MonoBehaviour
 	{
 		GetSizes ();
 		CreateMap ();
+
 	}
 }

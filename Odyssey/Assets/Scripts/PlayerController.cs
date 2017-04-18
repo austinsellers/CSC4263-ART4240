@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
 	Color normalColor;
 	Rigidbody2D rigidBody;
-	Vector2 currentPos,projectedPos;
+	Vector2 currentPos,projectedPos,prevPos;
 	BoxCollider2D boxCollider;
 	RaycastHit2D hit;
 
@@ -159,7 +159,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+	public bool didPlayerMove()
+	{
+		if (prevPos == null)
+			prevPos = currentPos;
+		else if (prevPos == currentPos)
+			return false;
+		return true;
+	}
 	void Rotate(float angle) 
 	{
 		rotat.z = angle;

@@ -9,6 +9,11 @@ TagManager:
   - Wall
   - AIHelper
   - EnemyManager
+  - Main Canvas
+  - Pause Canvas
+  - Game Over Canvas
+  - Upgrade Canvas
+  - Waypoint
   layers:
   - Default
   - TransparentFX

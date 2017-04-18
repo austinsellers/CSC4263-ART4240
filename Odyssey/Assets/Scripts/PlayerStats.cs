@@ -33,14 +33,14 @@ public class PlayerStats : MonoBehaviour
 	private Text expText;
 
 	private GameObject maskObj;
+	public GameObject minimap;
 
 	public float lerpSpeed = 2f;
 
 	void Awake() 
 	{
-		GameManager.instance.SetPlayerStats (this);
 		toLevelUp = new int[10] { 0, 20, 50, 100, 250, 500, 1000, 1750, 2500, 3500 };
-
+		minimap = gameObject.transform.FindChild ("Minimap").gameObject;
 		maskObj = transform.FindChild ("Experience Bar").transform.FindChild ("Mask").gameObject;
 		content = maskObj.transform.FindChild("Content").GetComponent<Image>();
 		expText = maskObj.GetComponentInChildren<Text>();
@@ -106,6 +106,22 @@ public class PlayerStats : MonoBehaviour
 			GameManager.instance.Upgrade ();
 	}
 
+	public void ResetStats()
+	{
+		health = 10;
+		defense = 0;
+		upgrade8 = false;
+		barkDamage = 1;
+		biteDamage = 3;
+		currentLevel = 1;
+		currentExp = 0;
+		expModifier = 1;
+		fillAmount = 0f;
+		healthText.text = "x " + health; 
+		expText.text = "Level: " + currentLevel;
+		content.fillAmount = 0f;
+	}
+
 	// Experience Bar Methods
 	private void UpdateBar()
 	{
@@ -114,6 +130,16 @@ public class PlayerStats : MonoBehaviour
 		{
 			content.fillAmount = Mathf.Lerp(content.fillAmount, fillAmount, lerpSpeed * Time.deltaTime);
 		}
+	}
+
+	public bool GetMinimapStatus()
+	{
+		return (minimap.activeInHierarchy);
+	}
+
+	public void SetMinimap(bool active)
+	{
+		minimap.SetActive (active);
 	}
 
 	private float MapExp(float value, float inMin, float inMax)

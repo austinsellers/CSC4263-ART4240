@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -41,10 +42,14 @@ public class GameManager : MonoBehaviour
 	private static bool paused = false;
 	private static bool gameOver = false;
 	private static bool upgrade = false;
+
+	private string curLevel;
+
 	public int wave;
 	public GameObject pauseCanvas;
 	public GameObject gameOverCanvas;
 	public GameObject upgradeCanvas;
+	public GameObject mainCanvas;
 
     //list stuff
     private TextListA textList = new TextListA();
@@ -83,8 +88,10 @@ public class GameManager : MonoBehaviour
 	[HideInInspector]
 	public PlayerStats playerStats;
 	public EnemyManager[] enemyManagers;
-    private MapManager mapManager;
-    private PlayerController player;
+	[HideInInspector]
+    public MapManager mapManager;
+	private GameObject player;
+    private PlayerController playerController;
 
 	public static GameManager instance = null;
 
@@ -99,14 +106,18 @@ public class GameManager : MonoBehaviour
 		// Doesn't destroy when reloading scene
 		DontDestroyOnLoad (gameObject);
 		mapManager = GetComponent<MapManager> ();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+		player = GameObject.Find ("Player");
+		playerStats = GameObject.FindObjectOfType<PlayerStats> ();
+		playerController = player.GetComponent<PlayerController>();
 		enemyManagers = GameObject.FindObjectsOfType<EnemyManager> ();
+		DontDestroyOnLoad (mapManager);
+		DontDestroyOnLoad (player);
 		SetupGame ();
 	}
 
 	void SetupGame()
 	{
-		mapManager.SetupMap ();
+		mapManager.SetupMap ("level");
 	}
 
 	void Start()
@@ -120,6 +131,8 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad (upgradeCanvas);
 		DontDestroyOnLoad (pauseCanvas);
 		DontDestroyOnLoad (gameOverCanvas);
+		DontDestroyOnLoad (mainCanvas);
+		DontDestroyOnLoad (playerStats);
 	}
 
 	bool readyForBoss(EnemyManager[] e)
@@ -164,28 +177,36 @@ public class GameManager : MonoBehaviour
 
 	void Update()
 	{
-		
-		if (readyForNextLevel (enemyManagers)) {
-			if (readyForBoss (enemyManagers)) {
-				Debug.Log ("Ready for bo$$ level");
-				GameOver ();
+		if (Input.GetKeyDown (KeyCode.Y)) {
+			LoadBoss ();
+		}
+		if (Input.GetKeyDown (KeyCode.U)) {
+			Restart (true);
+		}
+
+		if (curLevel != "BossBattle") {
+			if (readyForNextLevel (enemyManagers)) {
+				if (readyForBoss (enemyManagers)) {
+					Debug.Log ("Ready for bo$$ level");
+					GameOver ();
+				}
+				StartCoroutine (WaitFor (5f));
+				wave++;
+				Debug.Log ("New Wave:" + wave);
 			}
-			StartCoroutine(WaitFor(5f));
-			wave++;
-			Debug.Log ("New Wave:" + wave);
 		}
 		if (paused) 
 		{
 			if (Input.GetKeyDown (KeyCode.Q))
 				Quit();
 			if (Input.GetKeyDown (KeyCode.R))
-				Restart ();
+				Restart (false);
 		}
 		if (gameOver) 
 		{
 			if (Input.GetKeyDown (KeyCode.R)) 
 			{
-				Restart ();
+				Restart (true);
 				gameOverCanvas.SetActive (false);
 			}
 		} 
@@ -315,12 +336,28 @@ public class GameManager : MonoBehaviour
 		return (upgrade);
 	}
 
-	public void Restart()
+	public void Restart(bool begin)
 	{
 		if (paused)
 			paused = ToggleScale (pauseCanvas);
 		gameOver = false;
-		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+
+		if(begin)
+		{
+			SceneManager.LoadScene ("GameScene");
+			playerController.ResetPlayerStats ();
+			playerStats.ResetStats ();
+		}
+		else if (curLevel == "BossBattle") 
+		{
+			LoadBoss ();
+		}
+		else 
+		{
+			SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+			playerController.ResetPlayerStats ();
+			playerStats.ResetStats ();
+		}
 	}
 
 	public void Quit()
@@ -330,50 +367,68 @@ public class GameManager : MonoBehaviour
 		Application.Quit();
 	}
 
-	public void SetPlayerStats(PlayerStats stats)
+	public void LoadBoss()
 	{
-		playerStats = stats;
+		SceneManager.LoadScene ("BossBattle");
+		player.transform.position = new Vector3 (13.3f, 12.2f, 0f);
+		playerController.currentPos = player.transform.position;
+		playerController.projectedPos = player.transform.position;
+	}
+
+	public void SetLevel(string level)
+	{
+		curLevel = level;
+	}
+
+	public GameObject GetPlayer()
+	{
+		return player;
+	}
+
+	public PlayerController GetPlayerController()
+	{
+		return playerController;
 	}
 
     private void HandleUpgrade(int upNumber)
     {
         switch (upNumber)
         {
-            case 0:
+            case 1:
                 playerStats.barkDamage += 2;
                 break;
-            case 1:
+            case 2:
                 playerStats.biteDamage += 2;
                 break;
-            case 2:
-                player.speed += 2;
-                break;
             case 3:
-                player.barkDelay -= .25f;
+                playerController.speed += 2;
                 break;
             case 4:
-                player.biteDelay -= .25f;
+				playerController.barkDelay -= .25f;
                 break;
             case 5:
-                playerStats.defense += 1;
+				playerController.biteDelay -= .25f;
                 break;
             case 6:
-                player.distanceFromAtk += 2;
+                playerStats.defense += 1;
                 break;
             case 7:
-                playerStats.upgrade8 = true;
+				playerController.distanceFromAtk += 2;
                 break;
             case 8:
-                player.barkSpd = 1000f;
+                playerStats.upgrade8 = true;
                 break;
             case 9:
-                player.biteScale = new Vector2(1.5f, 1.5f);
-                player.distanceFromAtk += 1f;
+				playerController.barkSpd = 4f;
                 break;
             case 10:
-                player.barkScale += .2f;
+				playerController.biteScale = new Vector2(1.5f, 1.5f);
+				playerController.distanceFromAtk += 1f;
                 break;
             case 11:
+				playerController.barkScale += .2f;
+                break;
+            case 12:
                 playerStats.expModifier += .2f;
                 break;
         }

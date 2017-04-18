@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 212802232026425534}
   - component: {fileID: 50750279892143920}
   - component: {fileID: 61036706655544870}
-  - component: {fileID: 114930875231348940}
+  - component: {fileID: 114319553097297406}
+  - component: {fileID: 95110730179775008}
+  - component: {fileID: 61857796956406354}
   m_Layer: 8
   m_Name: Lawnmower
   m_TagString: Enemy
@@ -53,8 +55,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1828756993522540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9}
-  m_LocalScale: {x: 1.4999999, y: 1.4999999, z: 1}
+  m_LocalPosition: {x: 0.41, y: -1, z: -9}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 4845147372173724}
   m_RootOrder: 0
@@ -66,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124059486147056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.49, y: 1.76, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalPosition: {x: 19.53, y: 17.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4201960850428464}
   m_Father: {fileID: 0}
@@ -104,10 +106,41 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.5083828, y: -1.0745335}
   serializedVersion: 2
-  m_Size: {x: 2.37, y: 3.36}
---- !u!114 &114930875231348940
+  m_Size: {x: 2.2775683, y: 1.5344477}
+--- !u!61 &61857796956406354
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124059486147056}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.5083828, y: -1.0745335}
+  serializedVersion: 2
+  m_Size: {x: 2.2775683, y: 1.5344477}
+--- !u!95 &95110730179775008
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124059486147056}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba9286e95e725ae4a8d0b0bb8b42b645, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114319553097297406
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,14 +148,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1124059486147056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
+  m_Script: {fileID: 11500000, guid: 887d49b8bbcbf3f438371d7a0bad027c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   expToGive: 40
+  enemyManager: {fileID: 0}
+  enemyManagers: []
+  enemyName: 
   distance: 2
   speed: 2
   damage: 1
+  type: Melee
   health: 30
+  attackRate: 3
+  wayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  isCircular: 1
+  inReverse: 1
 --- !u!212 &212802232026425534
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -154,7 +197,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348462293
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 615a6c2329c867544ae4b7981878dfb6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 195bf08299890a24b88ef3fe85ce8e3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

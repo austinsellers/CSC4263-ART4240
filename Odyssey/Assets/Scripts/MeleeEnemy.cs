@@ -23,7 +23,7 @@ public class MeleeEnemy : EnemyMovement
 	}
 
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
 		base.Move();
 		if (!base.IsMoving ()) {
 			attack ();
@@ -33,7 +33,7 @@ public class MeleeEnemy : EnemyMovement
 		}        
 	}
 
-	void attack() {
+	protected void attack() {
 		if(Time.time > nextAttack){
 			playerController.HurtPlayer (damage);
 			nextAttack = Time.time + attackRate;

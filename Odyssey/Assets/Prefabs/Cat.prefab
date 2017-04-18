@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484707358913086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.99, y: -6.57, z: 0}
+  m_LocalPosition: {x: 22, y: 13.4, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 4468369108097532}
@@ -135,12 +135,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1484707358913086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2807bb257f89c4300a46b20b9a6725b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bf7a72b08e61fa4d87230bd8242b808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4244192836831044, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}
-  speed: 2
-  nextWaypointDistance: 3
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  traversableTagsCompatibility:
+    tagsChange: -1
+    tagsSet: -1
+  tagPenalties: 
 --- !u!114 &114712195206382694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,25 +183,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1484707358913086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b256bc717d9849ebb3d989dd7ebaff3, type: 3}
+  m_Script: {fileID: 11500000, guid: ea0f958454fcb04408b3ad44077f2d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  target: {fileID: 0}
+  speed: 2
+  nextWaypointDistance: 3
 --- !u!212 &212066514390889570
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -255,7 +255,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -348462293
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2af45f6f458c1734793a92fc6ecb3175, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7d6a7bf6ada4ca42bb8743aff9b6e98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

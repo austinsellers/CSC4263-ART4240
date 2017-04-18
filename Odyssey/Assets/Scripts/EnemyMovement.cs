@@ -17,11 +17,11 @@ public abstract class EnemyMovement : MonoBehaviour
 
 	BoxCollider2D boxCollider;
 	Rigidbody2D rigidBody;
-	RaycastHit2D hit;
+	protected RaycastHit2D hit;
 	SpriteRenderer renderer;
 
 	private int dir;
-	private bool isMoving;
+	protected bool isMoving;
 	public int expToGive;
 	private bool lockY = false,lockX = false;
 	public EnemyManager enemyManager;
@@ -73,6 +73,7 @@ public abstract class EnemyMovement : MonoBehaviour
 			isMoving = false;
 		}
 	}
+
 	protected virtual bool IsMoving()
 	{
 		return isMoving;

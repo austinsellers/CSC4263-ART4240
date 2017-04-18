@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 114712195206382694}
   - component: {fileID: 50969487191220566}
   - component: {fileID: 95717773036838136}
+  - component: {fileID: 114117721845536872}
+  - component: {fileID: 114997023377867622}
   m_Layer: 8
   m_Name: Cat
   m_TagString: Enemy
@@ -125,6 +127,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114117721845536872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1484707358913086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2807bb257f89c4300a46b20b9a6725b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 4244192836831044, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}
+  speed: 2
+  nextWaypointDistance: 3
 --- !u!114 &114712195206382694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,6 +162,33 @@ MonoBehaviour:
   type: Melee
   health: 6
   attackRate: 1
+--- !u!114 &114997023377867622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1484707358913086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b256bc717d9849ebb3d989dd7ebaff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  traversableTagsCompatibility:
+    tagsChange: -1
+    tagsSet: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!212 &212066514390889570
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -41,7 +41,8 @@ public class RangedEnemy : EnemyMovement
 	void attack()
 	{
 		if(Time.time > nextAttack){
-			StartCoroutine(shoot ());
+            gameObject.GetComponent<AudioSource>().Play();
+            StartCoroutine(shoot ());
 			nextAttack = Time.time + attackRate;
 		}
 	}

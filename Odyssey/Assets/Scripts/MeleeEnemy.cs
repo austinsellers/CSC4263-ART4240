@@ -35,7 +35,8 @@ public class MeleeEnemy : EnemyMovement
 
 	protected void attack() {
 		if(Time.time > nextAttack){
-			playerController.HurtPlayer (damage);
+            gameObject.GetComponent<AudioSource>().Play();
+            playerController.HurtPlayer (damage);
 			nextAttack = Time.time + attackRate;
 		}
 	}

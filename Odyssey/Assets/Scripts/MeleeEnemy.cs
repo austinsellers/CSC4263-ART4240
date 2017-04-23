@@ -4,41 +4,74 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyMovement 
 {
+	public GameObject Scratch;
+
 	public float distance = 2f;
 	public float speed = 2f;
 	public int damage = 1;
 	public string type = "Melee";
     public int health;
 	public float attackRate = 3f;
+	public Vector2 biteScale = new Vector2(1f,1f);
+	public float distanceFromAtk = 1.5f;
 	float nextAttack;
 	GameObject player;
 	PlayerController playerController;
+	AStar catAStar;
 
-	protected void Awake () {
+	protected void Awake () 
+	{
 		base.distance = distance;
 		base.speed = speed;
 		base.type = type;
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerController = player.GetComponent<PlayerController>();
+		if (enemyName.Equals ("Cat") || enemyName.Equals ("Cat(Clone)")) 
+		{
+			catAStar = gameObject.GetComponent<AStar> ();
+		}
 	}
 
 	// Update is called once per frame
-	protected void Update () {
+	protected void Update () 
+	{
 		base.Move();
-		if (!base.IsMoving ()) {
+		if (!base.IsMoving ()) 
+		{
 			attack ();
 		}
-		else {
+		else 
+		{
 			nextAttack = Time.time + attackRate;
 		}        
 	}
 
-	protected void attack() {
-		if(Time.time > nextAttack){
-            gameObject.GetComponent<AudioSource>().Play();
-            playerController.HurtPlayer (damage);
+	protected void attack() 
+	{
+		if(Time.time > nextAttack)
+		{
+			if (catAStar != null) 
+			{
+				gameObject.GetComponent<AudioSource> ().Play ();
+				MakeScratch (catAStar.dir);
+			} 
+			else 
+			{
+				playerController.HurtPlayer (damage);
+			}
 			nextAttack = Time.time + attackRate;
 		}
+	}
+
+	void MakeScratch(int dir)
+	{
+		GameObject scratch;
+		Vector2 currentPos = gameObject.transform.position;
+		scratch = (GameObject)Instantiate(Scratch, new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + distanceFromAtk * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, 0f ,0f));
+		scratch.GetComponent<Transform>().localScale = new Vector3(biteScale.x, biteScale.y, 0f);
+		scratch.transform.parent = gameObject.transform;
+		scratch.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * -90f));
+		scratch.GetComponent<ScratchBehavior> ().SetDamage(damage);
 	}
 
     public void takeDamage(int damage)

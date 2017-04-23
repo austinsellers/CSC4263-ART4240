@@ -19,7 +19,8 @@ public class AStar: MonoBehaviour
 
 	Vector3 rotat = new Vector3 (0f, 0f, 0f);
 	float offset = 3.5f;
-	int dir;
+	[HideInInspector]
+	public int dir;
 	Animator animator;
 	SpriteRenderer renderer;
 

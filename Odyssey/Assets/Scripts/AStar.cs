@@ -16,10 +16,19 @@ public class AStar: MonoBehaviour
 	public float nextWaypointDistance = 3;
 	//The waypoint we are currently moving towards
 	private int currentWaypoint = 0;
+
+	Vector3 rotat = new Vector3 (0f, 0f, 0f);
+	float offset = 3.5f;
+	int dir;
+	Animator animator;
+	SpriteRenderer renderer;
+
 	public void Start ()
 	{
 		AstarPath.active.Scan();
 		seeker = GetComponent<Seeker>();
+		animator = GetComponent<Animator> ();
+		renderer = GetComponent<SpriteRenderer> ();
 		target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 		player =  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 		StartCoroutine(MakeNewPath());
@@ -35,6 +44,79 @@ public class AStar: MonoBehaviour
 			//Reset the waypoint counter
 			currentWaypoint = 0;
 		}
+	}
+
+	void Rotate(float angle) 
+	{
+		rotat.z = angle;
+		gameObject.transform.rotation = Quaternion.Euler (rotat);
+	}
+
+	void Update()
+	{
+		bool xArea = (transform.position.x < target.position.x+offset && transform.position.x > target.position.x-offset);
+		bool yArea = (transform.position.y < target.position.y+offset && transform.position.y > target.position.y-offset);
+
+		if ((xArea && transform.position.y < target.position.y) && (yArea && transform.position.x >= target.position.x))
+		{
+			dir = 0; // Move UP, LEFT
+			Rotate(30f);
+		}
+		else if ((xArea && transform.position.y < target.position.y) && (yArea && transform.position.x < target.position.x))
+		{
+			dir = 0; // Move UP, RIGHT
+			Rotate(-30f);
+		}
+		else if ((xArea && transform.position.y >= target.position.y) && (yArea && transform.position.x < target.position.x))
+		{
+			dir = 2; // Move DOWN, RIGHT
+			Rotate(30f);
+		}
+		else if ((xArea && transform.position.y >= target.position.y) && (yArea && transform.position.x >= target.position.x))
+		{
+			dir = 2; // Move DOWN, LEFT
+			Rotate(-30f);
+		}
+		else if (yArea && transform.position.x >= target.position.x)
+		{
+			// Flips the sprite to face Left
+			if (renderer.flipX)
+				renderer.flipX = false;
+			// If the enemy is facing Left
+			dir = 3;
+			// Reset Rotation
+			Rotate(0f);
+		}
+		else if (xArea && transform.position.y < target.position.y)
+		{
+			// If the enemy is facing Up
+			dir = 0;
+			// Reset Rotation
+			Rotate(0f);
+		}
+		else if (xArea && transform.position.y >= target.position.y)
+		{
+			// If the enemy is facing Down
+			dir = 2;
+			// Reset Rotation
+			Rotate(0f);
+		}
+		else if (yArea && transform.position.x < target.position.x)
+		{
+			// Flips the sprite to face Right
+			if (!renderer.flipX)
+				renderer.flipX = true;
+			// If the enemy is facing Right
+			dir = 1;
+			// Reset Rotation
+			Rotate(0f);
+		}
+		if (dir == 1 || dir == 3)
+			animator.SetBool("enemyLR", true);
+		else
+			animator.SetBool("enemyLR", false);
+		animator.SetBool ("enemyMove", true);
+		animator.SetInteger ("enemyDir", dir);
 	}
 
 	public void FixedUpdate ()

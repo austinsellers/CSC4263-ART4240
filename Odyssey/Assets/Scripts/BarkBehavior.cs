@@ -25,7 +25,7 @@ public class BarkBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            if (other.gameObject.GetComponent<MeleeEnemy>() != null)
+			if (other.gameObject.GetComponent<MeleeEnemy>() != null && other.gameObject.name != "Lawnmower")
             {
                 other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
             }

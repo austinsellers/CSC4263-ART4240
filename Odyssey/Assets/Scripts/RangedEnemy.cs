@@ -59,6 +59,7 @@ public class RangedEnemy : EnemyMovement
 	public void takeDamage(int damage)
 	{
 		health = health - damage;
+		StartCoroutine (ChangeColor());
 		if(health<1)
 		{
 			Destroy(gameObject);

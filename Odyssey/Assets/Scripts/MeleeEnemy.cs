@@ -43,6 +43,7 @@ public class MeleeEnemy : EnemyMovement
     public void takeDamage(int damage)
     {
         health = health - damage;
+		StartCoroutine (ChangeColor ());
         if(health<1)
         {
             Destroy(gameObject);

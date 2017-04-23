@@ -25,7 +25,7 @@ public class BiteBehavior : MonoBehaviour {
         if (other.gameObject.tag == "Enemy" && !didDamage)
         {
             didDamage = true;
-            if(other.gameObject.GetComponent<MeleeEnemy>() != null)
+			if(other.gameObject.GetComponent<MeleeEnemy>() != null && other.gameObject.name != "Lawnmower")
                 other.gameObject.GetComponent<MeleeEnemy>().takeDamage(damage);
             if(other.gameObject.GetComponent<RangedEnemy>() != null)
                 other.gameObject.GetComponent<RangedEnemy>().takeDamage(damage);

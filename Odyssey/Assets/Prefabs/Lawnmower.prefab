@@ -68,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124059486147056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.53, y: 17.48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 21.43, y: 15.99, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4201960850428464}
   m_Father: {fileID: 0}
@@ -120,9 +120,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.5083828, y: -1.0745335}
+  m_Offset: {x: 1.2775288, y: -1.0745335}
   serializedVersion: 2
-  m_Size: {x: 2.2775683, y: 1.5344477}
+  m_Size: {x: 3.8158584, y: 1.5344477}
 --- !u!95 &95110730179775008
 Animator:
   serializedVersion: 3
@@ -155,16 +155,19 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   enemyManagers: []
   enemyName: 
+  Scratch: {fileID: 1152343708436430, guid: e78f45158fd302e4f98279f17f0d7ea7, type: 2}
   distance: 2
   speed: 2
   damage: 1
   type: Melee
   health: 30
   attackRate: 3
+  biteScale: {x: 1, y: 1}
+  distanceFromAtk: 1.5
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
-  isCircular: 1
+  isCircular: 0
   inReverse: 1
 --- !u!212 &212802232026425534
 SpriteRenderer:

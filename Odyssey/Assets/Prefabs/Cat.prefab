@@ -216,7 +216,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1484707358913086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf7a72b08e61fa4d87230bd8242b808, type: 3}
+  m_Script: {fileID: 11500000, guid: b217351b9f8ef4a0d803c313b308fdeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 2
+  nextWaypointDistance: 3
+  dir: 0
+--- !u!114 &114712195206382694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1484707358913086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expToGive: 2
+  enemyManager: {fileID: 0}
+  enemyManagers: []
+  enemyName: Cat
+  Scratch: {fileID: 1152343708436430, guid: 5f8341226689749298eb49ea6afbbb5d, type: 2}
+  distance: 1.5
+  speed: 3
+  damage: 1
+  type: Melee
+  health: 6
+  attackRate: 1
+  biteScale: {x: 1, y: 1}
+  distanceFromAtk: 1.5
+--- !u!114 &114997023377867622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1484707358913086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9564aaacd4b76427c9521bb9be9acbb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 1
@@ -235,45 +274,6 @@ MonoBehaviour:
     tagsChange: -1
     tagsSet: -1
   tagPenalties: 
---- !u!114 &114712195206382694
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484707358913086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  expToGive: 2
-  enemyManager: {fileID: 0}
-  enemyManagers: []
-  enemyName: Cat
-  Scratch: {fileID: 1152343708436430, guid: e78f45158fd302e4f98279f17f0d7ea7, type: 2}
-  distance: 1.5
-  speed: 3
-  damage: 1
-  type: Melee
-  health: 6
-  attackRate: 1
-  biteScale: {x: 1, y: 1}
-  distanceFromAtk: 1.5
---- !u!114 &114997023377867622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484707358913086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0f958454fcb04408b3ad44077f2d58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 2
-  nextWaypointDistance: 3
-  dir: 0
 --- !u!212 &212066514390889570
 SpriteRenderer:
   m_ObjectHideFlags: 1

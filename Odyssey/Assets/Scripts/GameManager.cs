@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 	public GameObject gameOverCanvas;
 	public GameObject upgradeCanvas;
 	public GameObject mainCanvas;
+	public GameObject startCanvas;
+	public GameObject[] hud;
 
     //list stuff
     private TextListA textList = new TextListA();
@@ -133,6 +135,34 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad (gameOverCanvas);
 		DontDestroyOnLoad (mainCanvas);
 		DontDestroyOnLoad (playerStats);
+		DontDestroyOnLoad (startCanvas);
+		StartCoroutine (attractMode ());
+	}
+	IEnumerator attractMode(){
+		startCanvas.SetActive (true);
+		pauseSpawning (true);
+		while (true) {
+			if (Input.GetKeyDown (KeyCode.UpArrow)||(Input.GetKeyDown(KeyCode.DownArrow))||(Input.GetKeyDown(KeyCode.LeftArrow))||(Input.GetKeyDown(KeyCode.RightArrow))) 
+			{
+				pauseSpawning (false);
+				startCanvas.SetActive (false);
+
+				for (int i = 0; i < hud.Length; i++) 
+				{
+					hud [i].SetActive (true);
+				}
+				Debug.Log ("Yo");
+				break;
+			}
+			yield return null;
+		}
+	}
+	void pauseSpawning(bool pauseSpawn)
+	{
+		for (int i = 0; i < enemyManagers.Length; i++) 
+		{
+			enemyManagers [i].pauseSpawn = pauseSpawn;
+		}
 	}
 
 	bool readyForBoss(EnemyManager[] e)

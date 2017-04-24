@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Bark;
 
 	public float speed = 6f;
-    public float barkSpd = 1f;
+    public float barkSpd = 700f;
     bool ableToBark = true;
     bool ableToBite = true;
     float lastBark;
@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + 2 * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2 (barkSpd * Mathf.Sin(dir * Mathf.PI / 2f), barkSpd * Mathf.Cos(dir * Mathf.PI / 2f)));
-            bark.GetComponent<Transform>().localScale = new Vector3(.2f, barkScale, 1f);
+            bark.GetComponent<Transform>().localScale = new Vector3(barkScale, .2f, 1f);
             if (dir != 2)
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * 90f));
             else
@@ -232,7 +232,8 @@ public class PlayerController : MonoBehaviour
         {
             bark = (GameObject)Instantiate(Bark, new Vector3(currentPos.x + 2 * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), currentPos.y + 2 * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4f), -5f), new Quaternion(0f, 0f, (dir * -Mathf.PI / 6), 0f));
             bark.GetComponent<Rigidbody2D>().AddForce(new Vector2(barkSpd * Mathf.Sin((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4), barkSpd * Mathf.Cos((dir - 4) * Mathf.PI / 2f + Mathf.PI / 4)));
-            if(dir == 4 || dir == 6)
+            bark.GetComponent<Transform>().localScale = new Vector3(barkScale, .2f, 1f);
+            if (dir == 4 || dir == 6)
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, (dir - 5) * 90f + 225f));
             else
                 bark.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, (dir - 5) * 90f + 45f));

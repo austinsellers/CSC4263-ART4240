@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
                                 "Decreased Bite Cooldown",
                                 "Increased Defense",
                                 "Increased Bite Range",
-                                "Chance of Healing on Kill",
+                                "Healing Chance On Kill",
                                 "Increased Bark Speed",
                                 "Increased Bite Size",
                                 "Increased Bark Size",
@@ -342,6 +342,10 @@ public class GameManager : MonoBehaviour
         upgrade2c0.GetComponent<Text>().text = txts[upgrade2Int];
         upgrade3c0.GetComponent<Text>().text = txts[upgrade3Int];
 
+        upgrade1c0.GetComponent<Text>().fontSize = 37;
+        upgrade2c0.GetComponent<Text>().fontSize = 37;
+        upgrade3c0.GetComponent<Text>().fontSize = 37;
+
         upgradeCanvas.SetActive (true);
 
         upgrade = true;
@@ -424,41 +428,41 @@ public class GameManager : MonoBehaviour
     {
         switch (upNumber)
         {
-            case 1:
+            case 0:
                 playerStats.barkDamage += 2;
                 break;
-            case 2:
+            case 1:
                 playerStats.biteDamage += 2;
                 break;
-            case 3:
+            case 2:
                 playerController.speed += 2;
                 break;
-            case 4:
+            case 3:
 				playerController.barkDelay -= .25f;
                 break;
-            case 5:
+            case 4:
 				playerController.biteDelay -= .25f;
                 break;
-            case 6:
+            case 5:
                 playerStats.defense += 1;
                 break;
-            case 7:
+            case 6:
 				playerController.distanceFromAtk += 2;
                 break;
-            case 8:
+            case 7:
                 playerStats.upgrade8 = true;
                 break;
-            case 9:
-				playerController.barkSpd = 4f;
+            case 8:
+				playerController.barkSpd = 1000f;
                 break;
-            case 10:
+            case 9:
 				playerController.biteScale = new Vector2(1.5f, 1.5f);
 				playerController.distanceFromAtk += 1f;
                 break;
-            case 11:
-				playerController.barkScale += .2f;
+            case 10:
+				playerController.barkScale = .4f;
                 break;
-            case 12:
+            case 11:
                 playerStats.expModifier += .2f;
                 break;
         }

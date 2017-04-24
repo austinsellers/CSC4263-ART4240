@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
 		startCanvas.SetActive (true);
 		pauseSpawning (true);
 		while (true) {
-			if (Input.GetKeyDown (KeyCode.UpArrow)||(Input.GetKeyDown(KeyCode.DownArrow))||(Input.GetKeyDown(KeyCode.LeftArrow))||(Input.GetKeyDown(KeyCode.RightArrow))) 
+			if (Input.GetKeyDown (KeyCode.UpArrow)||(Input.GetKeyDown(KeyCode.DownArrow))||(Input.GetKeyDown(KeyCode.LeftArrow))||(Input.GetKeyDown(KeyCode.RightArrow))|| Input.GetKeyDown(KeyCode.D) || (Input.GetKeyDown(KeyCode.S)) || (Input.GetKeyDown(KeyCode.A)) || (Input.GetKeyDown(KeyCode.W))) 
 			{
 				pauseSpawning (false);
 				startCanvas.SetActive (false);

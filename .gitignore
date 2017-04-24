@@ -30,3 +30,11 @@ sysinfo.txt
 *.unitypackage
 
 *.meta
+
+Odyssey/Assets/Prefabs/Cat.prefab
+
+Odyssey/Assets/Prefabs/Cat.prefab
+
+Odyssey/Assets/Scripts/AStar.cs
+
+Odyssey/Assets/GameScene.unity

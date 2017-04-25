@@ -151,7 +151,6 @@ public class GameManager : MonoBehaviour
 				{
 					hud [i].SetActive (true);
 				}
-				Debug.Log ("Yo");
 				break;
 			}
 			yield return null;

@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
 	public float spawnTime = 5f;
 	public Transform[] spawnPoints;
 	public int[] spawnAmount; //keeps track of how many enemies to spawn per wave
+	public int[] spawnAtBeginning;
 	private int wave=0;
 	private GameManager gameManager;
 
@@ -25,8 +26,19 @@ public class EnemyManager : MonoBehaviour
 		{
 			InvokeRepeating ("Spawn", spawnTime, spawnTime);
 		}
+		for (int i = 0; i < spawnAtBeginning.Length; i++) {
+			enemiesAlive [i] += spawnAtBeginning [i];
+		}
 		gameManager = GameObject.FindObjectOfType<GameManager> ();
 
+	}
+
+	public void spawn(int amount)
+	{
+		for (int i = 0; i < amount; i++) {
+			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+			Instantiate (enemy, spawnPoints [spawnPointIndex].position, spawnPoints [spawnPointIndex].rotation);
+		}
 	}
 
 	void Update() {
@@ -40,9 +52,7 @@ public class EnemyManager : MonoBehaviour
 				if (stats.health <= 0) {
 					return;
 				}
-
 				int spawnPointIndex = Random.Range (0, spawnPoints.Length);
-
 				Instantiate (enemy, spawnPoints [spawnPointIndex].position, spawnPoints [spawnPointIndex].rotation);
 				spawnAmount [wave]--;
 			} else {

@@ -205,6 +205,17 @@ public class GameManager : MonoBehaviour
 		yield return new WaitForSecondsRealtime (delay);
 	}
 
+	void newWave (){
+		StartCoroutine (WaitFor (5f));
+		wave++;
+		Debug.Log ("New Wave:" + wave);
+		for (int i = 0; i < enemyManagers.Length; i++) {
+			if (enemyManagers [i].spawnAtBeginning.Length > wave) {
+				enemyManagers [i].spawn (enemyManagers [i].spawnAtBeginning [wave]);
+			}
+		}
+	}
+
 	void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.Y)) {
@@ -220,9 +231,7 @@ public class GameManager : MonoBehaviour
 					Debug.Log ("Ready for bo$$ level");
 					LoadBoss ();
 				}
-				StartCoroutine (WaitFor (5f));
-				wave++;
-				Debug.Log ("New Wave:" + wave);
+				newWave ();
 			}
 		}
 		if (paused) 

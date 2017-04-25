@@ -11,9 +11,9 @@ public abstract class EnemyMovement : MonoBehaviour
 	protected PlayerStats playerStats;
 	Transform enemyTransform;
 
-	Vector2 playerPos;	
-	Vector2 currentPos;
-	Vector2 localPosition;
+	protected Vector2 playerPos;	
+	protected Vector2 currentPos;
+	protected Vector2 localPosition;
 	Vector2 projectedPos;
 
 	BoxCollider2D boxCollider;

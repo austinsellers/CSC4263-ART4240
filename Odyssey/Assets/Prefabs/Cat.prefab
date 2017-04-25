@@ -216,10 +216,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1484707358913086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2807bb257f89c4300a46b20b9a6725b6, type: 3}
+  m_Script: {fileID: 11500000, guid: ea0f958454fcb04408b3ad44077f2d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4244192836831044, guid: 5f34cc92225301f4189c08a6341d183e, type: 2}
+  target: {fileID: 0}
   speed: 2
   nextWaypointDistance: 3
   dir: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1484707358913086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b256bc717d9849ebb3d989dd7ebaff3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bf7a72b08e61fa4d87230bd8242b808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drawGizmos: 1

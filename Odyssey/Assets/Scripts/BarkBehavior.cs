@@ -10,7 +10,7 @@ public class BarkBehavior : MonoBehaviour
 
     void Start()
     {
-		damage = GameManager.instance.playerStats.barkDamage;
+		damage = 2;
         startTime = Time.time;
     }
 
@@ -34,6 +34,11 @@ public class BarkBehavior : MonoBehaviour
                 other.gameObject.GetComponent<RangedEnemy>().takeDamage(damage);
 
             }
+			if (other.gameObject.GetComponent<BossEnemy>() != null)
+			{
+				other.gameObject.GetComponent<BossEnemy>().takeDamage(damage);
+
+			}
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

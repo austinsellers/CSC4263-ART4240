@@ -89,7 +89,7 @@ public class PlayerStats : MonoBehaviour
 		currentExp += experienceToAdd * expModifier;
         if(upgrade8)
         {
-            int random8 = Random.Range(0, 7);
+            int random8 = Random.Range(0, 8);
             if(random8 == 7)
             {
                 health += 2;

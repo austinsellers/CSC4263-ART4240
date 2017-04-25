@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour
 			if (readyForNextLevel (enemyManagers)) {
 				if (readyForBoss (enemyManagers)) {
 					Debug.Log ("Ready for bo$$ level");
-					GameOver ();
+					LoadBoss ();
 				}
 				StartCoroutine (WaitFor (5f));
 				wave++;

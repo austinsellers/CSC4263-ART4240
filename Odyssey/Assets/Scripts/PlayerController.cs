@@ -296,6 +296,18 @@ public class PlayerController : MonoBehaviour
 		renderer.color = normalColor;
 	}
 
+	public void SlowdownPlayer(float time) 
+	{
+		StartCoroutine (Slowdown(time));
+	}
+
+	IEnumerator Slowdown(float time) 
+	{
+		speed /= 2;
+		yield return new WaitForSecondsRealtime(time);
+		speed *= 2;
+	}
+
 	public Vector2 getPosition ()
 	{
 		return transform.position;

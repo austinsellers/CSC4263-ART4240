@@ -58,12 +58,14 @@ public abstract class EnemyMovement : MonoBehaviour
 		if (Mathf.Abs (localPosition.y) > distance || Mathf.Abs (localPosition.x) > distance) 
 		{
 			isMoving = true;
+
 			if (type != "Melee") {
 				localPosition = localPosition.normalized;
 				MoveX ();
 				MoveY ();
 				projectedPos.Set (currentPos.x, currentPos.y);
 			}
+			
 		} 
 		else 
 		{

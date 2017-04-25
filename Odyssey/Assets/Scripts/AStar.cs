@@ -58,7 +58,7 @@ public class AStar: MeleeEnemy
 		bool xArea = (transform.position.x < target.position.x+offset && transform.position.x > target.position.x-offset);
 		bool yArea = (transform.position.y < target.position.y+offset && transform.position.y > target.position.y-offset);
 
-		if ((xArea && transform.position.y < target.position.y) && (yArea && transform.position.x >= target.position.x))
+		/*if ((xArea && transform.position.y < target.position.y) && (yArea && transform.position.x >= target.position.x))
 		{
 			dir = 0; // Move UP, LEFT
 			Rotate(30f);
@@ -77,8 +77,8 @@ public class AStar: MeleeEnemy
 		{
 			dir = 2; // Move DOWN, LEFT
 			Rotate(-30f);
-		}
-		else if (yArea && transform.position.x >= target.position.x)
+		}*/
+		if (yArea && transform.position.x >= target.position.x)
 		{
 			// Flips the sprite to face Left
 			if (renderer.flipX)

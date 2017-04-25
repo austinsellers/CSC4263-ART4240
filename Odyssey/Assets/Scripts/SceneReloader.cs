@@ -47,7 +47,7 @@ public class SceneReloader : MonoBehaviour
 		if (scene.name == "BossBattle") 
 		{
 			GameManager.instance.mapManager.SetupMap ("boss");
-			GameManager.instance.GetPlayer ().transform.position = new Vector3 (13.3f, 12.2f, 0f);
+			GameManager.instance.GetPlayer ().transform.position = new Vector3 (20.86f, 28.37f, 0f);
 			if (GameManager.instance.playerStats.GetMinimapStatus())
 				GameManager.instance.playerStats.SetMinimap (false);
 		} 

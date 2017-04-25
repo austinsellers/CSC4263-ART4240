@@ -219,6 +219,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0f958454fcb04408b3ad44077f2d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expToGive: 0
+  enemyManager: {fileID: 0}
+  enemyManagers: []
+  enemyName: 
+  Scratch: {fileID: 1152343708436430, guid: e78f45158fd302e4f98279f17f0d7ea7, type: 2}
+  distance: 2
+  speed: 2
+  damage: 1
+  type: Melee
+  health: 0
+  attackRate: 3
+  biteScale: {x: 1, y: 1}
+  distanceFromAtk: 1.5
   target: {fileID: 0}
   speed: 2
   nextWaypointDistance: 3
@@ -238,7 +251,7 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   enemyManagers: []
   enemyName: Cat
-  Scratch: {fileID: 0}
+  Scratch: {fileID: 1152343708436430, guid: e78f45158fd302e4f98279f17f0d7ea7, type: 2}
   distance: 1.5
   speed: 3
   damage: 1

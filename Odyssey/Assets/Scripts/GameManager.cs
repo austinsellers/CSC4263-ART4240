@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
 	public void LoadBoss()
 	{
 		SceneManager.LoadScene ("BossBattle");
-		player.transform.position = new Vector3 (13.3f, 12.2f, 0f);
+		player.transform.position = new Vector3 (20.86f, 28.37f, 0f);
 		playerController.currentPos = player.transform.position;
 		playerController.projectedPos = player.transform.position;
 	}

@@ -65,29 +65,29 @@ public class PlayerController : MonoBehaviour
             if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
             {
                 direction = 7;
-                Move(0); // Move UP
-                Move(3); // Move LEFT
+                Move(0,true); // Move UP
+                Move(3,true); // Move LEFT
                 Rotate(30f);
             }
             else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
             {
                 direction = 4;
-                Move(0); // Move UP
-                Move(1); // Move RIGHT
+                Move(0,true); // Move UP
+                Move(1,true); // Move RIGHT
                 Rotate(-30f);
             }
             else if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
             {
                 direction = 5;
-                Move(2); // Move DOWN
-                Move(1); // Move RIGHT
+                Move(2,true); // Move DOWN
+                Move(1,true); // Move RIGHT
                 Rotate(30f);
             }
             else if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
             {
                 direction = 6;
-                Move(2); // Move DOWN
-                Move(3); // Move LEFT
+                Move(2,true); // Move DOWN
+                Move(3,true); // Move LEFT
                 Rotate(-30f);
             }
             else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
                     renderer.flipX = false;
                 // If the player is facing Left
                 direction = 3;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             {
                 // If the player is facing Up
                 direction = 0;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 // If the player is facing Down
                 direction = 2;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
                     renderer.flipX = true;
                 // If the player is facing Right
                 direction = 1;
-                Move(direction);
+                Move(direction,false);
                 // Reset Rotation
                 Rotate(0f);
             }
@@ -173,26 +173,52 @@ public class PlayerController : MonoBehaviour
 		playerTransform.rotation = Quaternion.Euler(rotat);
 	}
 
-	void Move(int dir)
+	void Move(int dir,bool diag)
 	{
-		playerMove = true;
-		movement = speed * Time.deltaTime;
+        if (!diag)
+        {
+            playerMove = true;
+            movement = speed * Time.deltaTime;
 
-		if (dir == 3)
-			projectedPos += Vector2.left * movement;
-		if (dir == 1)
-			projectedPos += Vector2.right * movement;
-		if (dir == 0)
-			projectedPos += Vector2.up * movement;
-		if (dir == 2)
-			projectedPos += Vector2.down * movement;
-		
-		hit = Physics2D.Linecast (currentPos, projectedPos);
-		if (hit.transform == null) {
-			currentPos.Set (projectedPos.x, projectedPos.y);
-			rigidBody.MovePosition (currentPos);
-		} 
-		projectedPos.Set(currentPos.x,currentPos.y);
+            if (dir == 3)
+                projectedPos += Vector2.left * movement;
+            if (dir == 1)
+                projectedPos += Vector2.right * movement;
+            if (dir == 0)
+                projectedPos += Vector2.up * movement;
+            if (dir == 2)
+                projectedPos += Vector2.down * movement;
+
+            hit = Physics2D.Linecast(currentPos, projectedPos);
+            if (hit.transform == null)
+            {
+                currentPos.Set(projectedPos.x, projectedPos.y);
+                rigidBody.MovePosition(currentPos);
+            }
+            projectedPos.Set(currentPos.x, currentPos.y);
+        }
+        else
+        {
+            playerMove = true;
+            movement = speed * Time.deltaTime;
+
+            if (dir == 3)
+                projectedPos += (Vector2.left * movement) * (Mathf.Sqrt(2)/2);
+            if (dir == 1)
+                projectedPos += (Vector2.right * movement) * (Mathf.Sqrt(2) / 2);
+            if (dir == 0)
+                projectedPos += (Vector2.up * movement) * (Mathf.Sqrt(2) / 2);
+            if (dir == 2)
+                projectedPos += (Vector2.down * movement) * (Mathf.Sqrt(2) / 2);
+
+            hit = Physics2D.Linecast(currentPos, projectedPos);
+            if (hit.transform == null)
+            {
+                currentPos.Set(projectedPos.x, projectedPos.y);
+                rigidBody.MovePosition(currentPos);
+            }
+            projectedPos.Set(currentPos.x, currentPos.y);
+        }
 	}
 
 	void BiteMake(int dir)

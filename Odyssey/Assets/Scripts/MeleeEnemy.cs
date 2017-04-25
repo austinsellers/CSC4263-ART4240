@@ -36,9 +36,10 @@ public class MeleeEnemy : EnemyMovement
 	protected void Update () 
 	{
 		base.Move();
-		if (!base.IsMoving ()) 
+		//print ("here");
+		if (!base.IsMoving()) 
 		{
-			attack ();
+		//	attack ();
 		}
 		else 
 		{
@@ -48,29 +49,26 @@ public class MeleeEnemy : EnemyMovement
 
 	protected void attack() 
 	{
+		print ("attacking");
 		if(Time.time > nextAttack)
 		{
-			if (catAStar != null) 
-			{
+			
 				gameObject.GetComponent<AudioSource> ().Play ();
-				MakeScratch (catAStar.dir);
-			} 
-			else 
-			{
+			  MakeScratch (player.gameObject.transform.position);
 				playerController.HurtPlayer (damage);
-			}
 			nextAttack = Time.time + attackRate;
 		}
 	}
 
-	void MakeScratch(int dir)
+	void MakeScratch(Vector3 dir)
 	{
 		GameObject scratch;
 		Vector2 currentPos = gameObject.transform.position;
-		scratch = (GameObject)Instantiate(Scratch, new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + distanceFromAtk * Mathf.Cos(dir * Mathf.PI / 2f), -5f), new Quaternion(0f, 0f, 0f ,0f));
-		scratch.GetComponent<Transform>().localScale = new Vector3(biteScale.x, biteScale.y, 0f);
+		scratch = (GameObject)Instantiate(Scratch, dir, //new Vector3(currentPos.x + distanceFromAtk * Mathf.Sin(dir * Mathf.PI / 2f), currentPos.y + distanceFromAtk * Mathf.Cos(dir * Mathf.PI / 2f), -5f), 
+			new Quaternion(0f, 0f, 0f ,0f));
+		//scratch.GetComponent<Transform>().localScale = new Vector3(biteScale.x, biteScale.y, 0f);
 		scratch.transform.parent = gameObject.transform;
-		scratch.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, dir * -90f));
+		//scratch.GetComponent<Transform>().Rotate(new Vector3(0f, 0f, -90f));
 		scratch.GetComponent<ScratchBehavior> ().SetDamage(damage);
 	}
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
-public class AStar: MonoBehaviour
+public class AStar: MeleeEnemy
 {
 	//The point to move to
 	public Transform target;
@@ -133,6 +133,7 @@ public class AStar: MonoBehaviour
 
 		if (currentWaypoint >= path.vectorPath.Count)
 		{
+			base.attack ();
 			Debug.Log( "End Of Path Reached" );
 			return;
 		}
@@ -153,7 +154,7 @@ public class AStar: MonoBehaviour
 	IEnumerator MakeNewPath()
 	{
 		seeker.StartPath(transform.position,target.position,OnPathComplete );
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (.5f);
 		StartCoroutine(MakeNewPath ());
 	}
 

@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
 	private GameObject player;
     private PlayerController playerController;
 
+	private float fadeTime = 0.75f;
+
 	public static GameManager instance = null;
 
 	void Awake () 
@@ -127,13 +129,33 @@ public class GameManager : MonoBehaviour
 	IEnumerator ShowStory(){
 		prePreStartCanvas.SetActive (true);
 		pauseSpawning (true);
+		int panel = 1;
+		Image[] images = prePreStartCanvas.GetComponentsInChildren<Image> ();
+		for(int i = 1; i < images.Length; i++)
+		{
+			images [i].canvasRenderer.SetAlpha (0.0f);
+		}
 		while (true) {
 			if (Input.GetKeyDown(KeyCode.Space)) 
 			{
-				prePreStartCanvas.SetActive (false);
-				story = false;
-				StartCoroutine (attractMode ());
-				break;
+				if (panel < images.Length) 
+				{
+					images [panel++].CrossFadeAlpha (1.0f, fadeTime, false);
+				}
+				else 
+				{
+					StartCoroutine (attractMode ());
+					prePreStartCanvas.GetComponentInChildren<Text> ().CrossFadeAlpha (0.0f, fadeTime, false);
+					foreach (Image i in images) {
+						i.CrossFadeAlpha (0.0f, fadeTime, false);
+					}
+					yield return new WaitForSecondsRealtime (fadeTime);
+					prePreStartCanvas.SetActive (false);
+					GameObject.Find ("Start Music Manager").GetComponent<AudioSource> ().Stop();
+					GameObject.Find ("Music Manager").GetComponent<AudioSource> ().Play();
+					story = false;
+					break;
+				}
 			}
 			yield return null;
 		}
@@ -167,6 +189,13 @@ public class GameManager : MonoBehaviour
 	}
 	IEnumerator attractMode(){
 		startCanvas.SetActive (true);
+		startCanvas.GetComponentInChildren<Image> ().canvasRenderer.SetAlpha (0.0f);
+		startCanvas.GetComponentInChildren<Image> ().CrossFadeAlpha (1.0f, fadeTime, false);
+		foreach (Text t in startCanvas.GetComponentsInChildren<Text>()) 
+		{
+			t.canvasRenderer.SetAlpha (0.0f);
+			t.CrossFadeAlpha (1.0f, fadeTime, false);
+		}
 		pauseSpawning (true);
 		while (true) {
 			pauseSpawning (true);
@@ -178,6 +207,12 @@ public class GameManager : MonoBehaviour
 				Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K)) 
 			{
 				pauseSpawning (false);
+				startCanvas.GetComponentInChildren<Image> ().CrossFadeAlpha (0.0f, fadeTime, false);
+				foreach (Text t in startCanvas.GetComponentsInChildren<Text>()) 
+				{
+					t.CrossFadeAlpha (0.0f, fadeTime, false);
+				}
+				yield return new WaitForSecondsRealtime (fadeTime);
 				startCanvas.SetActive (false);
 
 				for (int i = 0; i < hud.Length; i++) 
@@ -284,10 +319,6 @@ public class GameManager : MonoBehaviour
 						RestartBoss ();
 					else
 						Restart ();
-					if (gameOver)
-						gameOverCanvas.SetActive (false);
-					else
-						winCanvas.SetActive (false);
 				}
 			} else if (upgrade) {
 				if (Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Keypad1)) {
@@ -451,6 +482,10 @@ public class GameManager : MonoBehaviour
 		if (paused)
 			paused = ToggleScale (pauseCanvas);
 		Time.timeScale = 1f;
+		if (gameOver)
+			gameOverCanvas.SetActive (false);
+		else if (win)
+			winCanvas.SetActive (false);
 		gameOver = false;
 		win = false;
 
@@ -476,6 +511,10 @@ public class GameManager : MonoBehaviour
 		if (paused)
 			paused = ToggleScale (pauseCanvas);
 		Time.timeScale = 1f;
+		if (gameOver)
+			gameOverCanvas.SetActive (false);
+		else if(win)
+			winCanvas.SetActive (false);
 		gameOver = false;
 		win = false;
 

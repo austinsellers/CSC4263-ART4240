@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 	void Update () 
 	{
         // Can't move and animations won't play if paused or upgrading
-		if (!GameManager.isPaused() && !GameManager.isUpgrade())
+		if (!GameManager.isPaused() && !GameManager.isUpgrade() && !GameManager.isStory() && !GameManager.hasWon())
         {
             // Doesn't move until button is pressed
             playerMove = false;

@@ -247,14 +247,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27915aaedcce4398aba5bc85225cce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expToGive: 2
+  expToGive: 5
   enemyManager: {fileID: 0}
   enemyManagers: []
   enemyName: Cat
   Scratch: {fileID: 1152343708436430, guid: e78f45158fd302e4f98279f17f0d7ea7, type: 2}
   distance: 1.5
   speed: 3
-  damage: 1
+  damage: 2
   type: Melee
   health: 6
   attackRate: 1

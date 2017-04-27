@@ -118,7 +118,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9a48a7b5cc223814f875a0e11f1280a3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3ed5a088bca681e4dad3d21d9d93d8a3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -217,13 +217,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6687514b741d948b375ae7f2a90ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expToGive: 10
+  expToGive: 8
   enemyManager: {fileID: 0}
   enemyManagers: []
   enemyName: Thundercloud
   distance: 4
   speed: 2
-  damage: 1
+  damage: 3
   type: Ranged
   health: 9
   warnTimeSeconds: 1

@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 82517714202127536}
   m_Layer: 8
   m_Name: Lawnmower
-  m_TagString: Enemy
+  m_TagString: Lawnmower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

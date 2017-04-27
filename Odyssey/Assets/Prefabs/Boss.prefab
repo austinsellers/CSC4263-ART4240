@@ -114,9 +114,9 @@ MonoBehaviour:
   distance: 4
   shootAmount: 3
   speed: 8
-  damage: 1
+  damage: 4
   type: Boss
-  health: 100
+  health: 50
   warnTimeSeconds: 0
   projectile: {fileID: 1409620703524690, guid: bd431bd280b5782459ecbc3ab3687203, type: 2}
   projectileSpeed: 350

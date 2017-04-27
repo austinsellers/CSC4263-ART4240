@@ -154,7 +154,7 @@ public class AStar: MeleeEnemy
 	IEnumerator MakeNewPath()
 	{
 		seeker.StartPath(transform.position,target.position,OnPathComplete );
-		yield return new WaitForSeconds (.5f);
+		yield return new WaitForSeconds (.1f);
 		StartCoroutine(MakeNewPath ());
 	}
 

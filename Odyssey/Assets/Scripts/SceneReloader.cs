@@ -48,8 +48,12 @@ public class SceneReloader : MonoBehaviour
 		{
 			GameManager.instance.mapManager.SetupMap ("boss");
 			GameManager.instance.GetPlayer ().transform.position = new Vector3 (20.86f, 28.37f, 0f);
+			GameManager.instance.GetPlayerController ().currentPos = GameManager.instance.GetPlayer ().transform.position;
+			GameManager.instance.GetPlayerController ().projectedPos = GameManager.instance.GetPlayer ().transform.position;
 			if (GameManager.instance.playerStats.GetMinimapStatus())
 				GameManager.instance.playerStats.SetMinimap (false);
+			if (GameManager.instance.waveText.gameObject.activeInHierarchy)
+				GameManager.instance.waveText.gameObject.SetActive(false);
 		} 
 		else if (scene.name == "GameScene")
 		{

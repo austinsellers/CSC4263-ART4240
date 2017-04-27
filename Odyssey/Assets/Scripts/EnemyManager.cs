@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
 	public float spawnTime = 5f;
 	public Transform[] spawnPoints;
 	public int[] spawnAmount; //keeps track of how many enemies to spawn per wave
+	private int[] spawnAmountCopy;
 	public int[] spawnAtBeginning;
 	private int wave=0;
 	private GameManager gameManager;
@@ -20,7 +21,9 @@ public class EnemyManager : MonoBehaviour
 	void Start () 
 	{
 		enemiesAlive = new int[spawnAmount.Length];
+		spawnAmountCopy = new int[spawnAmount.Length];
 		System.Array.Copy (spawnAmount, enemiesAlive, spawnAmount.Length);
+		System.Array.Copy (spawnAmount, spawnAmountCopy, spawnAmount.Length);
 		stats = GameObject.Find("Main Canvas").GetComponent<PlayerStats>();
 		if (spawnAmount.Length >= 0) 
 		{
@@ -47,6 +50,7 @@ public class EnemyManager : MonoBehaviour
 
 	void Spawn()
 	{
+		Debug.Log ("pausespawn" + pauseSpawn + " wave"+wave+ " spawnAmount.length" + spawnAmount.Length);
 		if (!pauseSpawn && wave < spawnAmount.Length) {
 			if (spawnAmount [wave] > 0) {
 				if (stats.health <= 0) {
@@ -70,5 +74,11 @@ public class EnemyManager : MonoBehaviour
 	public void enemyKilled()
 	{
 			enemiesAlive [wave]--;
+	}
+
+	public void ResetEnemy()
+	{
+		wave = gameManager.wave;
+		System.Array.Copy (spawnAmountCopy, spawnAmount, spawnAmount.Length);
 	}
 }

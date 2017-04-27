@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MeleeEnemy : EnemyMovement 
 {
@@ -79,7 +80,8 @@ public class MeleeEnemy : EnemyMovement
         if(health<1)
         {
             Destroy(gameObject);
-			enemyManager.enemyKilled ();
+			if(SceneManager.GetActiveScene().name != "BossBattle")
+				enemyManager.enemyKilled ();
 			playerStats.AddExperience (expToGive);
         }
     }

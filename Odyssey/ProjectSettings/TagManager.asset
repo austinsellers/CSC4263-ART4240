@@ -14,6 +14,7 @@ TagManager:
   - Game Over Canvas
   - Upgrade Canvas
   - Waypoint
+  - Lawnmower
   layers:
   - Default
   - TransparentFX

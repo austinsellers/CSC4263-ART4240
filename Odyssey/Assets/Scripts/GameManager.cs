@@ -40,7 +40,9 @@ public class TextListA
 public class GameManager : MonoBehaviour 
 {
 	private static bool paused = false;
+	private static bool story = true;
 	private static bool gameOver = false;
+	private static bool win = false;
 	private static bool upgrade = false;
 
 	private string curLevel;
@@ -51,6 +53,9 @@ public class GameManager : MonoBehaviour
 	public GameObject upgradeCanvas;
 	public GameObject mainCanvas;
 	public GameObject startCanvas;
+	public GameObject prePreStartCanvas;
+	public GameObject winCanvas;
+	public Text waveText;
 	public GameObject[] hud;
 
     //list stuff
@@ -86,6 +91,7 @@ public class GameManager : MonoBehaviour
                                 "Increased Experience Gain" };
 
     private Text gameOverText;
+	private Text winText;
 
 	[HideInInspector]
 	public PlayerStats playerStats;
@@ -112,19 +118,37 @@ public class GameManager : MonoBehaviour
 		playerStats = GameObject.FindObjectOfType<PlayerStats> ();
 		playerController = player.GetComponent<PlayerController>();
 		enemyManagers = GameObject.FindObjectsOfType<EnemyManager> ();
+
 		DontDestroyOnLoad (mapManager);
 		DontDestroyOnLoad (player);
 		SetupGame ();
 	}
 
+	IEnumerator ShowStory(){
+		prePreStartCanvas.SetActive (true);
+		pauseSpawning (true);
+		while (true) {
+			if (Input.GetKeyDown(KeyCode.Space)) 
+			{
+				prePreStartCanvas.SetActive (false);
+				story = false;
+				StartCoroutine (attractMode ());
+				break;
+			}
+			yield return null;
+		}
+	}
+
 	void SetupGame()
 	{
 		mapManager.SetupMap ("level");
+		waveText.text = "Wave: " + (wave + 1);
 	}
 
 	void Start()
 	{
 		gameOverText = gameOverCanvas.GetComponentsInChildren<Text> ()[1];
+		winText = winCanvas.GetComponentsInChildren<Text> ()[1];
         for (int i = 0; i < 12; i++)
         {
             textList.AddUpgrade(i);
@@ -133,16 +157,25 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad (upgradeCanvas);
 		DontDestroyOnLoad (pauseCanvas);
 		DontDestroyOnLoad (gameOverCanvas);
+		DontDestroyOnLoad (winCanvas);
 		DontDestroyOnLoad (mainCanvas);
 		DontDestroyOnLoad (playerStats);
+		DontDestroyOnLoad (prePreStartCanvas);
+		//startCanvas = GameObject.Find ("Story Canvas").gameObject;
 		DontDestroyOnLoad (startCanvas);
-		StartCoroutine (attractMode ());
+		StartCoroutine(ShowStory ());
 	}
 	IEnumerator attractMode(){
 		startCanvas.SetActive (true);
 		pauseSpawning (true);
 		while (true) {
-			if (Input.GetKeyDown (KeyCode.UpArrow)||(Input.GetKeyDown(KeyCode.DownArrow))||(Input.GetKeyDown(KeyCode.LeftArrow))||(Input.GetKeyDown(KeyCode.RightArrow))|| Input.GetKeyDown(KeyCode.D) || (Input.GetKeyDown(KeyCode.S)) || (Input.GetKeyDown(KeyCode.A)) || (Input.GetKeyDown(KeyCode.W))) 
+			pauseSpawning (true);
+			print ("In Attrach mode");
+			if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) ||
+				(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) ||
+				(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) ||
+				(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) ||
+				Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K)) 
 			{
 				pauseSpawning (false);
 				startCanvas.SetActive (false);
@@ -208,6 +241,7 @@ public class GameManager : MonoBehaviour
 		StartCoroutine (WaitFor (5f));
 		wave++;
 		Debug.Log ("New Wave:" + wave);
+		waveText.text = "Wave: " + (wave + 1);
 		for (int i = 0; i < enemyManagers.Length; i++) {
 			if (enemyManagers [i].spawnAtBeginning.Length > wave) {
 				enemyManagers [i].spawn (enemyManagers [i].spawnAtBeginning [wave]);
@@ -217,80 +251,89 @@ public class GameManager : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.Y)) {
-			LoadBoss ();
-		}
-		if (Input.GetKeyDown (KeyCode.U)) {
-			Restart (true);
-		}
+		if (!story) {
+			if (Input.GetKeyDown (KeyCode.Y)) {
+				LoadBoss ();
+			}
+			if (Input.GetKeyDown (KeyCode.H)) {
+				playerStats.AddHealth (2);
+			}
 
-		if (curLevel != "BossBattle") {
-			if (readyForNextLevel (enemyManagers)) {
-				if (readyForBoss (enemyManagers)) {
-					Debug.Log ("Ready for bo$$ level");
-					LoadBoss ();
+			if (curLevel != "BossBattle") {
+				if (readyForNextLevel (enemyManagers)) {
+					if (readyForBoss (enemyManagers)) {
+						Debug.Log ("Ready for bo$$ level");
+						LoadBoss ();
+					}
+					newWave ();
 				}
-				newWave ();
 			}
-		}
-		if (paused) 
-		{
-			if (Input.GetKeyDown (KeyCode.Q))
-				Quit();
-			if (Input.GetKeyDown (KeyCode.R))
-				Restart (false);
-		}
-		if (gameOver) 
-		{
-			if (Input.GetKeyDown (KeyCode.R)) 
-			{
-				Restart (true);
-				gameOverCanvas.SetActive (false);
+			if (paused) {
+				if (Input.GetKeyDown (KeyCode.Q))
+					Quit ();
+				if (Input.GetKeyDown (KeyCode.R)) {
+					if (SceneManager.GetActiveScene().name == "BossBattle")
+						RestartBoss ();
+					else
+						Restart ();
+				}
 			}
-		} 
-		else if (upgrade) 
-		{
-			if (Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Keypad1)) 
-			{
-                textList.AddUpgrade(upgrade2Int);
-                textList.AddUpgrade(upgrade3Int);
+			if (gameOver || win) {
+				if (Input.GetKeyDown (KeyCode.R)) {
+					if (SceneManager.GetActiveScene().name == "BossBattle")
+						RestartBoss ();
+					else
+						Restart ();
+					if (gameOver)
+						gameOverCanvas.SetActive (false);
+					else
+						winCanvas.SetActive (false);
+				}
+			} else if (upgrade) {
+				if (Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Keypad1)) {
+					textList.AddUpgrade (upgrade2Int);
+					textList.AddUpgrade (upgrade3Int);
 
-                DestroyImmediate(upgrade1);
-                DestroyImmediate(upgrade2);
-                DestroyImmediate(upgrade3);
+					DestroyImmediate (upgrade1);
+					DestroyImmediate (upgrade2);
+					DestroyImmediate (upgrade3);
 
-                HandleUpgrade(upgrade1Int);
-                upgrade = ToggleScale (upgradeCanvas);
-			} 
-			else if (Input.GetKeyDown (KeyCode.Alpha2) || Input.GetKeyDown (KeyCode.Keypad2))
-            {
-                textList.AddUpgrade(upgrade1Int);
-                textList.AddUpgrade(upgrade3Int);
+					HandleUpgrade (upgrade1Int);
+					upgrade = ToggleScale (upgradeCanvas);
+				} else if (Input.GetKeyDown (KeyCode.Alpha2) || Input.GetKeyDown (KeyCode.Keypad2)) {
+					textList.AddUpgrade (upgrade1Int);
+					textList.AddUpgrade (upgrade3Int);
 
-                DestroyImmediate(upgrade1);
-                DestroyImmediate(upgrade2);
-                DestroyImmediate(upgrade3);
+					DestroyImmediate (upgrade1);
+					DestroyImmediate (upgrade2);
+					DestroyImmediate (upgrade3);
 
-                HandleUpgrade(upgrade2Int);
-                upgrade = ToggleScale (upgradeCanvas);
-			} 
-			else if (Input.GetKeyDown (KeyCode.Alpha3) || Input.GetKeyDown (KeyCode.Keypad3)) 
-			{
-                textList.AddUpgrade(upgrade1Int);
-                textList.AddUpgrade(upgrade2Int);
+					HandleUpgrade (upgrade2Int);
+					upgrade = ToggleScale (upgradeCanvas);
+				} else if (Input.GetKeyDown (KeyCode.Alpha3) || Input.GetKeyDown (KeyCode.Keypad3)) {
+					textList.AddUpgrade (upgrade1Int);
+					textList.AddUpgrade (upgrade2Int);
 
-                DestroyImmediate(upgrade1);
-                DestroyImmediate(upgrade2);
-                DestroyImmediate(upgrade3);
+					DestroyImmediate (upgrade1);
+					DestroyImmediate (upgrade2);
+					DestroyImmediate (upgrade3);
 
-                HandleUpgrade(upgrade3Int);
-                upgrade = ToggleScale (upgradeCanvas);
+					HandleUpgrade (upgrade3Int);
+					upgrade = ToggleScale (upgradeCanvas);
+				}
+			} else {
+				if (Input.GetKeyDown (KeyCode.P))
+					paused = ToggleScale (pauseCanvas);
 			}
-		}
-		else 
-		{
-			if (Input.GetKeyDown (KeyCode.P))
-				paused = ToggleScale (pauseCanvas);
+
+			if(Input.GetKeyDown(KeyCode.M))
+			{
+				AudioSource music = GameObject.Find ("Music Manager").GetComponent<AudioSource> ();
+				if (music.isPlaying)
+					music.Stop ();
+				else
+					music.Play ();
+			}
 		}
 	}
 
@@ -338,9 +381,9 @@ public class GameManager : MonoBehaviour
         upgrade2c1 = upgrade2.transform.GetChild(1).gameObject;
         upgrade3c1 = upgrade3.transform.GetChild(1).gameObject;
 
-        upgrade1.GetComponent<Image>().color = Color.green;
-        upgrade2.GetComponent<Image>().color = Color.magenta;
-        upgrade3.GetComponent<Image>().color = Color.cyan;
+		upgrade1.GetComponent<Image>().color = Color.black;
+		upgrade2.GetComponent<Image>().color = Color.black;
+		upgrade3.GetComponent<Image>().color = Color.black;
 
         upgrade1c1.GetComponent<Text>().text = "Press 1";
         upgrade2c1.GetComponent<Text>().text = "Press 2";
@@ -363,10 +406,19 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // TODO: handle GameOver state displaying experience
+		Time.timeScale = 0f;
         gameOver = true;
         gameOverText.text = "Player Reached LVL: " + playerStats.getCurrentLevel() + "\nWith Experience of: " + playerStats.getCurrentExp() + "\nPress \"R\" to Restart";
         gameOverCanvas.SetActive(true);
     }
+
+	public void Win()
+	{
+		Time.timeScale = 0f;
+		win = true;
+		winText.text = "Player Reached LVL: " + playerStats.getCurrentLevel() + "\nWith Experience of: " + playerStats.getCurrentExp() + "\nPress \"R\" to Restart";
+		winCanvas.SetActive(true);
+	}
     
 	public static bool isPaused()
 	{
@@ -378,28 +430,80 @@ public class GameManager : MonoBehaviour
 		return (upgrade);
 	}
 
-	public void Restart(bool begin)
+	public static bool isStory()
+	{
+		return (story);
+	}
+
+	public static bool hasWon()
+	{
+		return (win);
+	}
+
+	private void DeleteEnemies()
+	{
+		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
+			DestroyImmediate(g);
+	}
+
+	public void Restart()
 	{
 		if (paused)
 			paused = ToggleScale (pauseCanvas);
+		Time.timeScale = 1f;
 		gameOver = false;
+		win = false;
 
-		if(begin)
+		DeleteEnemies ();
+
+		//SceneManager.LoadScene ("GameScene");
+		for (int i = 0; i < hud.Length; i++) 
 		{
-			SceneManager.LoadScene ("GameScene");
-			playerController.ResetPlayerStats ();
-			playerStats.ResetStats ();
+			hud [i].SetActive (false);
 		}
-		else if (curLevel == "BossBattle") 
+			
+		playerController.ResetPlayerStats ();
+		playerStats.ResetStats ();
+		player.gameObject.transform.position = new Vector2 (17.6f, 17.7f);
+		playerController.currentPos = player.transform.position;
+		playerController.projectedPos = player.transform.position;
+		StartCoroutine (attractMode ());
+		ResetWaves ();
+	}
+
+	public void RestartBoss()
+	{
+		if (paused)
+			paused = ToggleScale (pauseCanvas);
+		Time.timeScale = 1f;
+		gameOver = false;
+		win = false;
+
+		DeleteEnemies ();
+
+		SceneManager.LoadScene ("GameScene", LoadSceneMode.Single);
+		for (int i = 0; i < hud.Length; i++) 
 		{
-			LoadBoss ();
+			hud [i].SetActive (false);
 		}
-		else 
+
+		playerController.ResetPlayerStats ();
+		playerStats.ResetStats ();
+		player.gameObject.transform.position = new Vector2 (17.6f, 17.7f);
+		playerController.currentPos = player.transform.position;
+		playerController.projectedPos = player.transform.position;
+		StartCoroutine (attractMode ());
+		ResetWaves ();
+	}
+
+	private void ResetWaves()
+	{
+		wave = 0;
+		foreach (EnemyManager em in enemyManagers) 
 		{
-			SceneManager.LoadScene (SceneManager.GetActiveScene().name);
-			playerController.ResetPlayerStats ();
-			playerStats.ResetStats ();
+			em.ResetEnemy ();
 		}
+		waveText.text = "Wave: " + (wave + 1);
 	}
 
 	public void Quit()
@@ -411,10 +515,10 @@ public class GameManager : MonoBehaviour
 
 	public void LoadBoss()
 	{
-		SceneManager.LoadScene ("BossBattle");
-		player.transform.position = new Vector3 (20.86f, 28.37f, 0f);
-		playerController.currentPos = player.transform.position;
-		playerController.projectedPos = player.transform.position;
+		SceneManager.LoadScene ("BossBattle", LoadSceneMode.Single);
+		//player.transform.position = new Vector3 (20.86f, 28.37f, 0f);
+		//playerController.currentPos = player.transform.position;
+		//playerController.projectedPos = player.transform.position;
 	}
 
 	public void SetLevel(string level)

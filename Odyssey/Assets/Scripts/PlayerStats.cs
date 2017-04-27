@@ -13,8 +13,7 @@ public class PlayerStats : MonoBehaviour
 	private float fillAmount;
 
 	public Text healthText;
-	[HideInInspector]
-	public int health = 10;
+	public int health = 25;
 
     [HideInInspector]
     public int defense = 0;
@@ -39,7 +38,7 @@ public class PlayerStats : MonoBehaviour
 
 	void Awake() 
 	{
-		toLevelUp = new int[10] { 0, 20, 50, 100, 250, 500, 1000, 1750, 2500, 3500 };
+		toLevelUp = new int[10] { 0, 20, 60, 100, 150, 200, 300, 350, 420, 500 };
 		minimap = gameObject.transform.FindChild ("Minimap").gameObject;
 		maskObj = transform.FindChild ("Experience Bar").transform.FindChild ("Mask").gameObject;
 		content = maskObj.transform.FindChild("Content").GetComponent<Image>();
@@ -102,7 +101,7 @@ public class PlayerStats : MonoBehaviour
 		currentLevel++;
 		expText.text = "Level: " + currentLevel;
 		// TODO: allow the player to pick which stat to upgrade
-		if (currentLevel != 1)
+		if (currentLevel != 1 && !GameManager.hasWon())
 			GameManager.instance.Upgrade ();
 	}
 

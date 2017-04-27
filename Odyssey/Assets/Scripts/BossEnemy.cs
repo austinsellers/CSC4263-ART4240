@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossEnemy : EnemyMovement 
 {
@@ -96,7 +97,6 @@ public class BossEnemy : EnemyMovement
 
 		playerPos = GameObject.FindGameObjectWithTag ("Player").transform.position;	
 		localPosition = distanceAway ();
-		Debug.Log (localPosition);
 		if (Mathf.Sqrt(Mathf.Pow(localPosition.x,2)+Mathf.Pow(localPosition.y,2)) < distance && !poleAttack) 
 		{
 			poleAttack = true;
@@ -246,8 +246,9 @@ public class BossEnemy : EnemyMovement
 		StartCoroutine (ChangeColor ());
 		if(health<1)
 		{
-			Destroy(gameObject);
 			playerStats.AddExperience (expToGive);
+			GameManager.instance.Win ();
+			Destroy(gameObject);
 		}
 	}
 

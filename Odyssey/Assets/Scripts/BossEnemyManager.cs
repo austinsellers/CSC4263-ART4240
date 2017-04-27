@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossManager : MonoBehaviour 
+public class BossEnemyManager : MonoBehaviour 
 {
 	public GameObject enemy;
 	public Transform[] spawnPoints;

@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 		pauseSpawning (true);
 		while (true) {
 			pauseSpawning (true);
-			print ("In Attrach mode");
+			//print ("In Attrach mode");
 			if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) ||
 				(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) ||
 				(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) ||

@@ -107,7 +107,7 @@ public class PlayerStats : MonoBehaviour
 
 	public void ResetStats()
 	{
-		health = 10;
+		health = 25;
 		defense = 0;
 		upgrade8 = false;
 		barkDamage = 1;

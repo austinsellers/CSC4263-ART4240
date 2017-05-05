@@ -50,7 +50,7 @@ public class EnemyManager : MonoBehaviour
 
 	void Spawn()
 	{
-		Debug.Log ("pausespawn" + pauseSpawn + " wave"+wave+ " spawnAmount.length" + spawnAmount.Length);
+		//Debug.Log ("pausespawn" + pauseSpawn + " wave"+wave+ " spawnAmount.length" + spawnAmount.Length);
 		if (!pauseSpawn && wave < spawnAmount.Length) {
 			if (spawnAmount [wave] > 0) {
 				if (stats.health <= 0) {

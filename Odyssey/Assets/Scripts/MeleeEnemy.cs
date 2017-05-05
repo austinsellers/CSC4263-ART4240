@@ -19,6 +19,7 @@ public class MeleeEnemy : EnemyMovement
 	GameObject player;
 	PlayerController playerController;
 	AStar catAStar;
+	bool death = false;
 
 	protected void Awake () 
 	{
@@ -50,14 +51,16 @@ public class MeleeEnemy : EnemyMovement
 
 	protected void attack() 
 	{
-		print ("attacking");
-		if(Time.time > nextAttack)
+		if (!death) 
 		{
-			
+			//print ("attacking");
+			if (Time.time > nextAttack) 
+			{
 				gameObject.GetComponent<AudioSource> ().Play ();
-			  MakeScratch (player.gameObject.transform.position);
+				MakeScratch (player.gameObject.transform.position);
 				playerController.HurtPlayer (damage);
-			nextAttack = Time.time + attackRate;
+				nextAttack = Time.time + attackRate;
+			}
 		}
 	}
 
@@ -75,14 +78,26 @@ public class MeleeEnemy : EnemyMovement
 
     public void takeDamage(int damage)
     {
-        health = health - damage;
-		StartCoroutine (ChangeColor ());
-        if(health<1)
-        {
-            Destroy(gameObject);
-			if(SceneManager.GetActiveScene().name != "BossBattle")
-				enemyManager.enemyKilled ();
-			playerStats.AddExperience (expToGive);
-        }
+		if (!death) 
+		{
+			health = health - damage;
+			StartCoroutine (ChangeColor ());
+			if (health < 1) 
+			{
+				StartCoroutine (DoDeath(true));
+			}
+		}
     }
+
+	public IEnumerator DoDeath(bool exp) 
+	{
+		death = true;
+		animator.SetTrigger ("enemyDeath");
+		yield return new WaitForSecondsRealtime (0.3f);
+		Destroy(gameObject);
+		if(SceneManager.GetActiveScene().name != "BossBattle")
+			enemyManager.enemyKilled ();
+		if(exp)
+			playerStats.AddExperience (expToGive);
+	}
 }

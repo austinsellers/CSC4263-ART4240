@@ -26,10 +26,6 @@ public class BoltBehavior : MonoBehaviour {
 			other.gameObject.GetComponent<PlayerController>().HurtPlayer(damage);
 			Destroy(gameObject);
 		}
-		if (other.gameObject.tag == "Wall")
-		{
-			Destroy(gameObject);
-		}
 	}
 		
 }

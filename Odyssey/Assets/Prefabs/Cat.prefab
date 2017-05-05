@@ -254,7 +254,7 @@ MonoBehaviour:
   Scratch: {fileID: 1152343708436430, guid: e78f45158fd302e4f98279f17f0d7ea7, type: 2}
   distance: 1.5
   speed: 3
-  damage: 2
+  damage: 1
   type: Melee
   health: 6
   attackRate: 1

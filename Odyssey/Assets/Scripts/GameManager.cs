@@ -77,6 +77,20 @@ public class GameManager : MonoBehaviour
 
     public GameObject UpgradePrefab;
 
+	private int codeIndex;
+	private KeyCode[] konami = new KeyCode[] {
+		KeyCode.UpArrow,
+		KeyCode.UpArrow,
+		KeyCode.DownArrow,
+		KeyCode.DownArrow,
+		KeyCode.LeftArrow,
+		KeyCode.RightArrow,
+		KeyCode.LeftArrow,
+		KeyCode.RightArrow,
+		KeyCode.B,
+		KeyCode.A
+	};
+
     private string[] txts = {   "Increased Bark Damage",
                                 "Increased Bite Damage",
                                 "Increased Movement Speed",
@@ -98,6 +112,8 @@ public class GameManager : MonoBehaviour
 	public EnemyManager[] enemyManagers;
 	[HideInInspector]
     public MapManager mapManager;
+	[HideInInspector]
+	public GameObject musicManager;
 	private GameObject player;
     private PlayerController playerController;
 
@@ -120,21 +136,26 @@ public class GameManager : MonoBehaviour
 		playerStats = GameObject.FindObjectOfType<PlayerStats> ();
 		playerController = player.GetComponent<PlayerController>();
 		enemyManagers = GameObject.FindObjectsOfType<EnemyManager> ();
+		musicManager = GameObject.Find ("Music Manager");
+
 
 		DontDestroyOnLoad (mapManager);
 		DontDestroyOnLoad (player);
+		DontDestroyOnLoad (musicManager);
 		SetupGame ();
 	}
 
 	IEnumerator ShowStory(){
 		prePreStartCanvas.SetActive (true);
+		GameObject.Find ("Start Music Manager").GetComponent<AudioSource> ().Play();
 		pauseSpawning (true);
-		int panel = 1;
+		int panel = 2;
 		Image[] images = prePreStartCanvas.GetComponentsInChildren<Image> ();
 		for(int i = 1; i < images.Length; i++)
 		{
 			images [i].canvasRenderer.SetAlpha (0.0f);
 		}
+		images [1].CrossFadeAlpha (1.0f, fadeTime + 0.25f, false);
 		while (true) {
 			if (Input.GetKeyDown(KeyCode.Space)) 
 			{
@@ -152,7 +173,7 @@ public class GameManager : MonoBehaviour
 					yield return new WaitForSecondsRealtime (fadeTime);
 					prePreStartCanvas.SetActive (false);
 					GameObject.Find ("Start Music Manager").GetComponent<AudioSource> ().Stop();
-					GameObject.Find ("Music Manager").GetComponent<AudioSource> ().Play();
+					musicManager.GetComponent<AudioSource> ().Play();
 					story = false;
 					break;
 				}
@@ -189,6 +210,7 @@ public class GameManager : MonoBehaviour
 	}
 	IEnumerator attractMode(){
 		startCanvas.SetActive (true);
+
 		startCanvas.GetComponentInChildren<Image> ().canvasRenderer.SetAlpha (0.0f);
 		startCanvas.GetComponentInChildren<Image> ().CrossFadeAlpha (1.0f, fadeTime, false);
 		foreach (Text t in startCanvas.GetComponentsInChildren<Text>()) 
@@ -287,6 +309,20 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (!story) {
+			if (Input.GetKeyDown (konami [codeIndex])) {
+				Debug.Log ("Pushed: " + konami[codeIndex]);
+				if (++codeIndex == konami.Length) 
+				{
+					codeIndex = 0;
+					Debug.Log ("KONAMI ACTIVATED");
+					playerStats.AddHealth(9001 - playerStats.health);
+					playerController.biteScale = new Vector2(5f, 5f);
+					playerStats.biteDamage = 1000;
+					playerController.distanceFromAtk += 3f;
+				}
+			}
+
+
 			if (Input.GetKeyDown (KeyCode.Y)) {
 				LoadBoss ();
 			}
@@ -531,6 +567,7 @@ public class GameManager : MonoBehaviour
 		player.gameObject.transform.position = new Vector2 (17.6f, 17.7f);
 		playerController.currentPos = player.transform.position;
 		playerController.projectedPos = player.transform.position;
+		musicManager.GetComponent<AudioSource> ().Play ();
 		StartCoroutine (attractMode ());
 		ResetWaves ();
 	}
@@ -554,6 +591,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadBoss()
 	{
+		musicManager.GetComponent<AudioSource> ().Stop ();
 		SceneManager.LoadScene ("BossBattle", LoadSceneMode.Single);
 		//player.transform.position = new Vector3 (20.86f, 28.37f, 0f);
 		//playerController.currentPos = player.transform.position;

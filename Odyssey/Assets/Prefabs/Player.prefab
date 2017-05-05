@@ -228,6 +228,7 @@ MonoBehaviour:
   barkScale: 0.2
   currentPos: {x: 0, y: 0}
   projectedPos: {x: 0, y: 0}
+  prevPos: {x: 0, y: 0}
 --- !u!212 &212031253000156982
 SpriteRenderer:
   m_ObjectHideFlags: 1

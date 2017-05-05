@@ -11,13 +11,14 @@ public class RangedEnemy : EnemyMovement
 	public string type = "Ranged";
 	public int health;
 	public float warnTimeSeconds = 1f;
-	float attackRate = 2f;
+	float attackRate = 1.5f;
 	float nextAttack;
 	GameObject player;
 	public GameObject projectile;
 	public float projectileSpeed;
 	PlayerController playerController;
 	Vector2 currentPos;
+	bool death = false;
 
 	protected void Awake () {
 		base.distance = distance;
@@ -60,14 +61,26 @@ public class RangedEnemy : EnemyMovement
 
 	public void takeDamage(int damage)
 	{
-		health = health - damage;
-		StartCoroutine (ChangeColor());
-		if(health<1)
+		if (!death) 
 		{
-			Destroy(gameObject);
-			if(SceneManager.GetActiveScene().name != "BossBattle")
-				enemyManager.enemyKilled ();
-			playerStats.AddExperience (expToGive);
+			health = health - damage;
+			StartCoroutine (ChangeColor ());
+			if (health < 1) 
+			{
+				StartCoroutine (DoDeath (true));	
+			}
 		}
+	}
+
+	public IEnumerator DoDeath(bool exp) 
+	{
+		death = true;
+		animator.SetTrigger ("enemyDeath");
+		yield return new WaitForSecondsRealtime (0.3f);
+		Destroy(gameObject);
+		if(SceneManager.GetActiveScene().name != "BossBattle")
+			enemyManager.enemyKilled ();
+		if(exp)
+			playerStats.AddExperience (expToGive);
 	}
 }

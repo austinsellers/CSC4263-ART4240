@@ -143,7 +143,7 @@ public class MapManager : MonoBehaviour
 
 	public void SetupMap(string level)
 	{
-		Debug.Log ("Setting up map: " + level);
+		//Debug.Log ("Setting up map: " + level);
 		GetSizes ();
 		if (level.Equals ("level")) 
 		{

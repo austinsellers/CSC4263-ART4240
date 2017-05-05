@@ -66,7 +66,7 @@ public class LawnmowerEnemy : MeleeEnemy
 	{
 		if (other.gameObject.name.Equals ("Player")) 
 		{
-			PauseMower ();
+			isWaiting = true;
 		}
 	}
 
@@ -82,7 +82,7 @@ public class LawnmowerEnemy : MeleeEnemy
 	{
 		if (other.gameObject.name.Equals ("Player")) 
 		{
-			PauseMower ();
+			isWaiting = false;
 		}
 	}
 

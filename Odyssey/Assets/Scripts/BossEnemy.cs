@@ -38,6 +38,9 @@ public class BossEnemy : EnemyMovement
 	private Transform transform;
 
 	bool poleAttack = false;
+	bool death = false;
+
+	public BossEnemyManager[] bossEnemyManagers;
 
 	[HideInInspector]
 	public float oldSpeed;
@@ -46,6 +49,7 @@ public class BossEnemy : EnemyMovement
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
 		playerController = player.GetComponent<PlayerController>();
+		bossEnemyManagers = GameObject.FindObjectsOfType<BossEnemyManager> ();
 	}
 
 	void Start () 
@@ -242,13 +246,44 @@ public class BossEnemy : EnemyMovement
 
 	public void takeDamage(int damage)
 	{
-		health = health - damage;
-		StartCoroutine (ChangeColor ());
-		if(health<1)
+		if (!death) 
 		{
-			playerStats.AddExperience (expToGive);
-			GameManager.instance.Win ();
-			Destroy(gameObject);
+			health = health - damage;
+			StartCoroutine (ChangeColor ());
+			if (health < 1) 
+			{
+				StartCoroutine (DoDeath());
+			}
+		}
+	}
+
+	IEnumerator DoDeath() 
+	{
+		death = true;
+		pauseSpawning (true);
+		DeleteEnemies ();
+		animator.SetTrigger ("bossDeath");
+		yield return new WaitForSecondsRealtime (2f);
+		// playerStats.AddExperience (expToGive);
+		GameManager.instance.Win ();
+	}
+
+	void pauseSpawning(bool pauseSpawn)
+	{
+		for (int i = 0; i < bossEnemyManagers.Length; i++) 
+		{
+			bossEnemyManagers [i].pauseSpawn = pauseSpawn;
+		}
+	}
+
+	private void DeleteEnemies()
+	{
+		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy")) 
+		{
+			if (g.gameObject.GetComponent<MeleeEnemy> () != null)
+				StartCoroutine (g.gameObject.GetComponent<MeleeEnemy> ().DoDeath (false));
+			if (g.gameObject.GetComponent<RangedEnemy> () != null)
+				StartCoroutine(g.gameObject.GetComponent<RangedEnemy> ().DoDeath (false));
 		}
 	}
 

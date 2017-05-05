@@ -310,7 +310,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (!story) {
 			if (Input.GetKeyDown (konami [codeIndex])) {
-				Debug.Log ("Pushed: " + konami[codeIndex]);
+				//Debug.Log ("Pushed: " + konami[codeIndex]);
 				if (++codeIndex == konami.Length) 
 				{
 					codeIndex = 0;

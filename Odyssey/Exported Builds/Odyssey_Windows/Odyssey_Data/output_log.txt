@@ -1,0 +1,50 @@
+Initialize engine version: 5.5.0f3 (38b4efef76f0)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   22.21.13.8165
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll (this message is harmless)
+Loading D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll into Unity Child Domain
+- Completed reload, in  0.042 seconds
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\School Stuff\LSU\Semester 6\CSC 4263 - Video Game Design\Project Workspace\Odyssey\Exported Builds\Odyssey_Windows\Odyssey_Data\Managed\System.dll (this message is harmless)
+desktop: 3840x2160 60Hz; virtual: 3840x2160 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1754)
+
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1754)
+
+UnloadTime: 3.555552 ms
+Scanning - Process took 8 ms to complete
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Game Exited
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 3584 -> priority: 1 
+  Thread -> id: 1de8 -> priority: 1 
